@@ -30,6 +30,7 @@ import { StacheTutorialModule } from './modules/tutorial';
 import { StacheTutorialStepModule } from './modules/tutorial-step';
 import { StacheVideoModule } from './modules/video';
 import { StacheWrapperModule } from './modules/wrapper';
+import { StacheFooterModule } from './modules/footer';
 
 export * from './modules/shared';
 
@@ -61,7 +62,8 @@ export * from './modules/shared';
     StacheTutorialModule,
     StacheTutorialStepModule,
     StacheVideoModule,
-    StacheWrapperModule
+    StacheWrapperModule,
+    StacheFooterModule
   ]
 })
 export class StacheModule { }

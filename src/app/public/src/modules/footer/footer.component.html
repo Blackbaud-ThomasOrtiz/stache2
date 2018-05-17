@@ -1,0 +1,15 @@
+<div class="stache-footer-wrapper">
+  <div class="stache-footer-content">
+      <h3>
+        {{ siteName }}
+      </h3>
+      <ul>
+        <li *ngFor="let resource of resourceLinks">
+          <a stacheRouterLink="{{resource.path}}">{{ resource.name }}</a>
+        </li>
+      </ul>
+  </div>
+  <div class="copyright-label">
+    {{ copyright }}
+  </div>
+</div>

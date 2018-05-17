@@ -37,6 +37,18 @@
       },
       "searchConfig": {
       },
+      "footer": {
+        "resourceLinks": [
+          {
+            "name": "Privacy Policy",
+            "path": "https://www.google.com"
+          },
+          {
+            "name": "Terms of Use",
+            "path": "/demos/anchor-link"
+          }
+        ]
+      },
       "googleAnalytics": {
         "enabled": "true",
         "clientId": "UA-2418840-1",

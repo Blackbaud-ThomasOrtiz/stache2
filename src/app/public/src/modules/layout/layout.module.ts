@@ -13,6 +13,7 @@ import { StacheGridModule } from '../grid';
 import { StachePageHeaderModule } from '../page-header';
 import { StachePageAnchorModule } from '../page-anchor';
 import { StachePageSummaryModule } from '../page-summary';
+import { StacheFooterModule } from '../footer';
 
 import { StacheContainerComponent } from './container.component';
 import { StacheLayoutComponent } from './layout.component';
@@ -34,7 +35,8 @@ import { StacheLayoutSidebarComponent } from './layout-sidebar.component';
     StacheTableOfContentsModule,
     StachePageSummaryModule,
     StachePageHeaderModule,
-    StachePageAnchorModule
+    StachePageAnchorModule,
+    StacheFooterModule
   ],
   declarations: [
     StacheContainerComponent,
