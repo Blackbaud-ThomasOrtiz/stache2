@@ -25,3 +25,34 @@
     }
   }
 }
+
+.sidebar-layout-wrapper {
+  /deep/
+  .stache-column:first-child {
+    padding-right: 0;
+    border-right: 1px solid #cdcfd2;
+    box-shadow: 0px -2px 5px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .stache-column:nth-child(2) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .sidebar-layout-content-column {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  /deep/
+  .stache-row {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  /deep/
+  .sidebar-layout-columns {
+    padding-top: 15px;
+  }
+}
