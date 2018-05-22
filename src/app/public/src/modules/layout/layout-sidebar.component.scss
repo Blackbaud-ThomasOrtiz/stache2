@@ -28,13 +28,13 @@
 
 .sidebar-layout-wrapper {
   /deep/
-  .stache-column:first-child {
+  .stache-column:nth-child(2) {
     padding-right: 0;
     border-right: 1px solid #cdcfd2;
     box-shadow: 0px -2px 5px 0 rgba(0, 0, 0, 0.3);
   }
 
-  .stache-column:nth-child(2) {
+  .stache-column:first-child {
     padding-right: 0;
     padding-left: 0;
   }
@@ -54,5 +54,6 @@
   /deep/
   .sidebar-layout-columns {
     padding-top: 15px;
+    padding-bottom: 15px;
   }
 }
