@@ -24,7 +24,7 @@ export class StacheFooterComponent implements OnInit {
 
   private setCopyright() {
     this.resourceLinks = _get(this.configService, 'skyux.appSettings.stache.footer.resourceLinks', []);
-    this.copyright = _get(this.configService, 'skyux.appSettings.stache.footer.copyright', `&copy; Blackbaud, Inc. All rights reserved.`);
+    this.copyright = _get(this.configService, 'skyux.appSettings.stache.footer.copyright', `Blackbaud, Inc. All rights reserved.`);
     this.siteName = _get(this.configService, 'skyux.appSettings.name', `Stache`);
   }
 }

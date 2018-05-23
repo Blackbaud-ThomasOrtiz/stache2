@@ -1,15 +1,15 @@
 <div class="stache-footer-wrapper">
   <div class="stache-footer-content">
-      <h3>
+      <h3 class="stache-footer-site-name">
         {{ siteName }}
       </h3>
-      <ul>
+      <ul class="footer-link-list">
         <li *ngFor="let resource of resourceLinks">
-          <a stacheRouterLink="{{resource.path}}">{{ resource.name }}</a>
+          <a class="footer-link" stacheRouterLink="{{resource.path}}">{{ resource.name }}</a>
         </li>
       </ul>
   </div>
-  <div class="copyright-label">
-    {{ copyright }}
+  <div *ngIf="copyright" class="copyright-label">
+    &copy; {{ copyright }}
   </div>
 </div>
