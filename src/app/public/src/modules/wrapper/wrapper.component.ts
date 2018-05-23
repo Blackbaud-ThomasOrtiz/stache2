@@ -47,6 +47,9 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   public showEditButton: boolean = this.checkEditButtonUrl();
 
   @Input()
+  public showFooter: boolean = this.checkFooterData();
+
+  @Input()
   public showTableOfContents: boolean = false;
 
   @Input()
@@ -112,6 +115,11 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   private checkEditButtonUrl(): boolean {
     const url = _get(this.config, 'skyux.appSettings.stache.editButton.url');
     return url !== undefined;
+  }
+
+  private checkFooterData(): boolean {
+    const footerData = _get(this.config, 'skyux.appSettings.stache.footer');
+    return footerData !== undefined;
   }
 
   private checkRouteHash(): void {

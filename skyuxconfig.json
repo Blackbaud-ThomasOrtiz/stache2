@@ -41,7 +41,7 @@
         "resourceLinks": [
           {
             "name": "Privacy Policy",
-            "path": "https://www.google.com"
+            "path": "/demos/privacy-policy"
           },
           {
             "name": "Terms of Use",

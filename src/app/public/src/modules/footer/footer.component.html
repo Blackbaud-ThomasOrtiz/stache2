@@ -1,11 +1,11 @@
 <div class="stache-footer-wrapper">
   <div class="stache-footer-content">
-      <h3 class="stache-footer-site-name">
+      <h3>
         {{ siteName }}
       </h3>
       <ul class="footer-link-list">
         <li *ngFor="let resource of resourceLinks">
-          <a class="footer-link" stacheRouterLink="{{resource.path}}">{{ resource.name }}</a>
+          <a stacheRouterLink="{{resource.path}}">{{ resource.name }}</a>
         </li>
       </ul>
   </div>

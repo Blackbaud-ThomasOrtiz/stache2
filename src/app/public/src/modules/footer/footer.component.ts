@@ -18,11 +18,11 @@ export class StacheFooterComponent implements OnInit {
 
   constructor(private configService: StacheConfigService) { }
 
-  ngOnInit() {
-    this.setCopyright();
+  public ngOnInit(): void {
+    this.setFooterData();
   }
 
-  private setCopyright() {
+  private setFooterData(): void {
     this.resourceLinks = _get(this.configService, 'skyux.appSettings.stache.footer.resourceLinks', []);
     this.copyright = _get(this.configService, 'skyux.appSettings.stache.footer.copyright', `Blackbaud, Inc. All rights reserved.`);
     this.siteName = _get(this.configService, 'skyux.appSettings.name', `Stache`);
