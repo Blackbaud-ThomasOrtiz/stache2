@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 
 import { StacheLayout } from './layout';
 import { InputConverter } from '../shared';

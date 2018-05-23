@@ -5,7 +5,7 @@
   .stache-affix-top {
     @media (min-width: $stache-screen-sm-min) {
       display: flex;
-      max-height: 100%;
+      height: calc(100vh - #{ 2 * $stache-omnibar-height });
     }
 
     @media (max-width: $stache-screen-xs-max) {
@@ -27,34 +27,28 @@
 }
 
 .sidebar-layout-wrapper {
-  /deep/
-  .stache-column:nth-child(2) {
-    padding-right: 0;
-    border-right: 1px solid #cdcfd2;
-    box-shadow: 0px -2px 5px 0 rgba(0, 0, 0, 0.3);
-  }
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 
-  .stache-column:first-child {
-    padding-right: 0;
-    padding-left: 0;
+  .sidebar-layout-sidebar-column {
+    border-right: 1px solid #cdcfd2;
+    padding-bottom: calc( #{ $stache-padding } * 2);
+    box-shadow: 0px -2px 5px 0 rgba(0, 0, 0, 0.3);
+    width: $side-bar-column-width;
+    height: calc(100vh - #{ $stache-omnibar-height });
+    background-color: #fff;
   }
 
   .sidebar-layout-content-column {
-    padding-right: 15px;
-    padding-left: 15px;
+    flex: 1;
+    padding: calc( #{ $stache-padding } * 1.5);
+    min-height: calc(100vh - #{ $stache-omnibar-height });
   }
 
-  /deep/
-  .stache-row {
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-  }
-
-  /deep/
-  .sidebar-layout-columns {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    min-height: 100vh;
+  .side-bar-layout-inner-sidebar {
+    max-height: 100%;
+    overflow-y: scroll;
+    padding: calc(#{ $stache-padding } * 1.5) calc( #{ $stache-padding } * 1.5) 0;
   }
 }
