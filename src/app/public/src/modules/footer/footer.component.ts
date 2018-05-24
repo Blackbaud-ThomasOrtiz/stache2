@@ -14,7 +14,7 @@ const _get = require('lodash.get');
 export class StacheFooterComponent implements OnInit {
   public copyright: string;
   public siteName: string;
-  public resourceLinks: StacheNavLink[];
+  public nav: any[];
 
   constructor(private configService: StacheConfigService) { }
 
@@ -23,7 +23,7 @@ export class StacheFooterComponent implements OnInit {
   }
 
   private setFooterData(): void {
-    this.resourceLinks = _get(this.configService, 'skyux.appSettings.stache.footer.resourceLinks', []);
+    this.nav = _get(this.configService, 'skyux.appSettings.stache.footer.nav', []);
     this.copyright = _get(this.configService, 'skyux.appSettings.stache.footer.copyright', `Blackbaud, Inc. All rights reserved.`);
     this.siteName = _get(this.configService, 'skyux.appSettings.name', `Stache`);
   }

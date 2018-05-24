@@ -38,14 +38,14 @@
       "searchConfig": {
       },
       "footer": {
-        "resourceLinks": [
+        "nav": [
           {
-            "name": "Privacy Policy",
-            "path": "/demos/privacy-policy"
+            "title": "Privacy Policy",
+            "route": "/demos/privacy-policy"
           },
           {
-            "name": "Terms of Use",
-            "path": "/demos/anchor-link"
+            "title": "Terms of Use",
+            "route": "/demos/anchor-link"
           }
         ]
       },

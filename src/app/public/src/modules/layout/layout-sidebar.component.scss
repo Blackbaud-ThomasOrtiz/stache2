@@ -35,7 +35,7 @@
     border-right: 1px solid #cdcfd2;
     padding-bottom: calc( #{ $stache-padding } * 2);
     box-shadow: 0px -2px 5px 0 rgba(0, 0, 0, 0.3);
-    width: $side-bar-column-width;
+    width: $stache-sidebar-column-width;
     height: calc(100vh - #{ $stache-omnibar-height });
     background-color: #fff;
   }
