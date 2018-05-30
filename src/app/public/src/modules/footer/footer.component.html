@@ -4,8 +4,8 @@
         {{ siteName }}
       </h3>
       <ul *ngIf="footerLinks" class="footer-link-list">
-        <li *ngFor="let item of nav">
-          <a stacheRouterLink="{{ item.route }}">{{ item.title }}</a>
+        <li *ngFor="let link of footerLinks">
+          <a stacheRouterLink="{{ link.route }}">{{ link.title }}</a>
         </li>
       </ul>
       <div *ngIf="copyright" class="copyright-label">

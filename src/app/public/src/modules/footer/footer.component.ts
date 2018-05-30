@@ -24,6 +24,6 @@ export class StacheFooterComponent implements OnInit {
   private setFooterData(): void {
     this.footerLinks = _get(this.configService, 'skyux.appSettings.stache.footer.nav');
     this.copyright = _get(this.configService, 'skyux.appSettings.stache.footer.copyright', `Blackbaud, Inc. All rights reserved.`);
-    this.siteName = _get(this.configService, 'skyux.appSettings.name');
+    this.siteName = _get(this.configService, 'skyux.name');
   }
 }
