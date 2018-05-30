@@ -1,9 +1,9 @@
 <div class="stache-footer-wrapper">
   <div class="stache-footer-content">
-      <h3 class="stache-footer-site-name">
+      <h3 *ngIf="siteName" class="stache-footer-site-name">
         {{ siteName }}
       </h3>
-      <ul  class="footer-link-list">
+      <ul *ngIf="footerLinks" class="footer-link-list">
         <li *ngFor="let item of nav">
           <a stacheRouterLink="{{ item.route }}">{{ item.title }}</a>
         </li>

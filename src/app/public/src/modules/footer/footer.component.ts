@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { StacheNavLink } from '../nav';
-
 import { StacheConfigService } from '../shared';
 
 const _get = require('lodash.get');
@@ -15,7 +12,7 @@ export class StacheFooterComponent implements OnInit {
   public copyright: string;
   public currentDate: Date;
   public siteName: string;
-  public nav: any[];
+  public footerLinks: any[];
 
   constructor(private configService: StacheConfigService) { }
 
@@ -25,8 +22,8 @@ export class StacheFooterComponent implements OnInit {
   }
 
   private setFooterData(): void {
-    this.nav = _get(this.configService, 'skyux.appSettings.stache.footer.nav', []);
+    this.footerLinks = _get(this.configService, 'skyux.appSettings.stache.footer.nav');
     this.copyright = _get(this.configService, 'skyux.appSettings.stache.footer.copyright', `Blackbaud, Inc. All rights reserved.`);
-    this.siteName = _get(this.configService, 'skyux.appSettings.name', `Stache`);
+    this.siteName = _get(this.configService, 'skyux.appSettings.name');
   }
 }
