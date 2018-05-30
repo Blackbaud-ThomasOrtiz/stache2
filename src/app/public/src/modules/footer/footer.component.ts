@@ -13,12 +13,14 @@ const _get = require('lodash.get');
 })
 export class StacheFooterComponent implements OnInit {
   public copyright: string;
+  public currentDate: Date;
   public siteName: string;
   public nav: any[];
 
   constructor(private configService: StacheConfigService) { }
 
   public ngOnInit(): void {
+    this.currentDate = new Date();
     this.setFooterData();
   }
 

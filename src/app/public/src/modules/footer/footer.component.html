@@ -9,7 +9,7 @@
         </li>
       </ul>
       <div *ngIf="copyright" class="copyright-label">
-          &copy; {{ copyright }}
+          &copy; {{ currentDate | date: 'yyyy' }} {{ copyright }}
       </div>
   </div>
 </div>
