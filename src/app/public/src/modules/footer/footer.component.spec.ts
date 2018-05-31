@@ -74,7 +74,7 @@ describe('StacheFooterComponent', () => {
     fixture.detectChanges();
     expect(component.footerLinks).toBe(footerConfig.nav);
     expect(component.copyright).toBe(footerConfig.copyright);
-    expect(component.siteName).toBe(mockConfigService.skyux.appSettings.name);
+    expect(component.siteName).toBe(mockConfigService.skyux.name);
   });
 
   it('should provide defaults if no values are supplied', () => {
