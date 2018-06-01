@@ -1,41 +1,40 @@
-<stache-layout-blank identifier="sidebar">
-  <stache-container>
+<div class="sidebar-layout-container">
+  <stache-layout-blank identifier="container">
+    <stache-container>
 
-    <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
-    </stache-breadcrumbs>
+      <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
+      </stache-breadcrumbs>
 
-    <stache-edit-button *ngIf="showEditButton">
-    </stache-edit-button>
+      <stache-edit-button *ngIf="showEditButton">
+      </stache-edit-button>
 
-    <stache-row reverseColumnOrder="true">
-      <stache-column screenSmall="8" screenMedium="9" screenLarge="10">
+      <stache-row>
+        <stache-column>
 
-        <stache-page-header *ngIf="pageTitle">
-          <stache-page-title>
-            {{pageTitle}}
-          </stache-page-title>
-        </stache-page-header>
+          <stache-page-header *ngIf="pageTitle">
+            <stache-page-title>
+              {{pageTitle}}
+            </stache-page-title>
+          </stache-page-header>
 
-        <ng-content select="[stachePageSummary]"></ng-content>
-        <ng-content select="stache-page-summary"></ng-content>
+          <ng-content select="[stachePageSummary]"></ng-content>
+          <ng-content select="stache-page-summary"></ng-content>
 
-        <stache-table-of-contents *ngIf="showTableOfContents" [routes]="inPageRoutes">
-        </stache-table-of-contents>
+          <stache-table-of-contents *ngIf="showTableOfContents" [routes]="inPageRoutes">
+          </stache-table-of-contents>
 
-        <ng-content></ng-content>
+          <ng-content></ng-content>
 
-      </stache-column>
-      <stache-column screenSmall="4" screenMedium="3" screenLarge="2">
+        </stache-column>
+      </stache-row>
+    </stache-container>
+  </stache-layout-blank>
 
-        <stache-affix>
-          <stache-sidebar [routes]="sidebarRoutes">
-          </stache-sidebar>
-        </stache-affix>
+  <stache-back-to-top *ngIf="showBackToTop">
+  </stache-back-to-top>
 
-      </stache-column>
-    </stache-row>
-  </stache-container>
-</stache-layout-blank>
-
-<stache-back-to-top *ngIf="showBackToTop">
-</stache-back-to-top>
+  <div class="sidebar-wrapper">
+    <stache-sidebar [routes]="sidebarRoutes">
+    </stache-sidebar>
+  </div>
+</div>
