@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Renderer2 } from '@angular/core';
 
 import { StacheLayout } from './layout';
 import { InputConverter } from '../shared';
@@ -37,4 +37,10 @@ export class StacheLayoutSidebarComponent implements StacheLayout {
   @Input()
   @InputConverter()
   public showTableOfContents: boolean;
+
+  public sidebarClosed: boolean = false;
+
+  public toggleSidebar() {
+    this.sidebarClosed = !this.sidebarClosed;
+  }
 }

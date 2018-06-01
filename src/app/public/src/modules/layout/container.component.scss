@@ -1,5 +1,7 @@
 @import '../../styles/_variables';
 
 .stache-container {
-  max-width: 100%;
+  width: 100%;
+  padding: 0 $stache-padding * 3;
+  flex: 1;
 }

@@ -1,35 +1,32 @@
 @import '../../styles/_variables';
 
-/deep/
-.stache-layout-sidebar {
-  .stache-affix-top {
-    @media (min-width: $stache-screen-sm-min) {
-      display: flex;
-      height: calc(100vh - #{ 2 * $stache-omnibar-height });
-    }
-
-    @media (max-width: $stache-screen-xs-max) {
-      position: static !important;
-      top: auto !important;
-    }
-  }
-}
-
 .sidebar-layout-container {
-  position: relative;
-  padding-left: $stache-sidebar-column-width;
-
   .sidebar-wrapper {
-    position: absolute;
-    width: $stache-sidebar-column-width;
-    min-height: 100vh;
-    background-color: #fff;
-    left: 0;
-    top: 0;
+    position: fixed;
+    top: $stache-omnibar-height;
     bottom: 0;
-    border-right: 1px solid #cdcfd2;
+    left: 0;
+    overflow-y: scroll;
+    width: $stache-sidebar-column-width;
+    padding: calc( #{ $stache-padding } * 1.5);
     padding-bottom: calc( #{ $stache-padding } * 2);
+    background-color: #fff;
+    border-right: 1px solid #cdcfd2;
     box-shadow: 0px -2px 5px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  /deep/
+  .stache-layout {
+    padding-left: $stache-sidebar-column-width;
+  }
+
+  .sidebar-closed {
+    transition: 300ms;
+    margin-left: -$stache-sidebar-column-width;
+  }
+
+  .sidebar-open {
+    transition: 300ms;
   }
 }
 

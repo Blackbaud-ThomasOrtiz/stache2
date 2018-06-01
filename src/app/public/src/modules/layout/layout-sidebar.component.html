@@ -1,39 +1,39 @@
 <div class="sidebar-layout-container">
-  <stache-layout-blank identifier="container">
-    <stache-container>
+  <div class="layout-container" [ngClass]="{'sidebar-closed': sidebarClosed, 'sidebar-open': !sidebarClosed  }">
+    <stache-layout-blank identifier="container">
+      <stache-container>
+        <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
+        </stache-breadcrumbs>
+        <span (click)="toggleSidebar()">X</span>
+        <stache-edit-button *ngIf="showEditButton">
+        </stache-edit-button>
 
-      <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
-      </stache-breadcrumbs>
+        <stache-row>
+          <stache-column>
 
-      <stache-edit-button *ngIf="showEditButton">
-      </stache-edit-button>
+            <stache-page-header *ngIf="pageTitle">
+              <stache-page-title>
+                {{pageTitle}}
+              </stache-page-title>
+            </stache-page-header>
 
-      <stache-row>
-        <stache-column>
+            <ng-content select="[stachePageSummary]"></ng-content>
+            <ng-content select="stache-page-summary"></ng-content>
 
-          <stache-page-header *ngIf="pageTitle">
-            <stache-page-title>
-              {{pageTitle}}
-            </stache-page-title>
-          </stache-page-header>
+            <stache-table-of-contents *ngIf="showTableOfContents" [routes]="inPageRoutes">
+            </stache-table-of-contents>
 
-          <ng-content select="[stachePageSummary]"></ng-content>
-          <ng-content select="stache-page-summary"></ng-content>
+            <ng-content></ng-content>
 
-          <stache-table-of-contents *ngIf="showTableOfContents" [routes]="inPageRoutes">
-          </stache-table-of-contents>
+          </stache-column>
+        </stache-row>
+      </stache-container>
+    </stache-layout-blank>
 
-          <ng-content></ng-content>
-
-        </stache-column>
-      </stache-row>
-    </stache-container>
-  </stache-layout-blank>
-
-  <stache-back-to-top *ngIf="showBackToTop">
-  </stache-back-to-top>
-
-  <div class="sidebar-wrapper">
+    <stache-back-to-top *ngIf="showBackToTop">
+    </stache-back-to-top>
+  </div>
+  <div class="sidebar-wrapper" [ngClass]="{'sidebar-closed': sidebarClosed, 'sidebar-open': !sidebarClosed  }">
     <stache-sidebar [routes]="sidebarRoutes">
     </stache-sidebar>
   </div>
