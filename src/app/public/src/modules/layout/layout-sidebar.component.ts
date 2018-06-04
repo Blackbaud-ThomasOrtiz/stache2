@@ -1,8 +1,12 @@
 import { Component, Input, Renderer2 } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { StacheLayout } from './layout';
-import { InputConverter } from '../shared';
+import { InputConverter, StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
 import { StacheNavLink } from '../nav';
+import { Subject } from 'rxjs';
+
+const WINDOW_SIZE_XSMALL = 768;
 
 @Component({
   selector: 'stache-layout-sidebar',
@@ -40,7 +44,53 @@ export class StacheLayoutSidebarComponent implements StacheLayout {
 
   public sidebarClosed: boolean = false;
 
-  public toggleSidebar() {
-    this.sidebarClosed = !this.sidebarClosed;
+  private sidebarClosedByUser: boolean = false;
+
+  private ngUnsubscribe: Subject<any> = new Subject();
+
+  constructor(
+    private renderer: Renderer2,
+    private omnibarService: StacheOmnibarAdapterService,
+    private windowRef: StacheWindowRef
+  ) {
+    this.windowRef.onResize$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(() => {
+        this.checkWindowWidth();
+      });
+  }
+
+  public ngOnInit() {
+    let omnibarHeight = this.omnibarService.getHeight();
+    let sidebarWrapperEl = this.windowRef.nativeWindow.document.querySelector('#stache-sidebar-wrapper');
+    this.renderer.setStyle(sidebarWrapperEl, 'top', `${omnibarHeight}px`);
+    this.checkWindowWidth();
+  }
+
+  public closeSidebar() {
+    this.sidebarClosedByUser = true;
+    this.sidebarClosed = true;
+  }
+
+  public openSidebar() {
+    this.sidebarClosedByUser = true;
+    this.sidebarClosed = false;
+  }
+
+  private checkWindowWidth() {
+    let windowWidth = this.windowRef.nativeWindow.innerWidth;
+
+    if (windowWidth < WINDOW_SIZE_XSMALL && !this.sidebarClosedByUser) {
+      this.sidebarClosed = true;
+    }
+
+    if (windowWidth > WINDOW_SIZE_XSMALL && !this.sidebarClosedByUser) {
+      this.sidebarClosed = false;
+    }
+  }
+
+  public ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

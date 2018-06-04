@@ -19,7 +19,12 @@ $stache-font-size-base: 15px !default;
 $stache-border-radius: 3px !default;
 
 $stache-padding: 10px !default;
+$stache-padding-half: $stache-padding / 2 !default;
+$stache-padding-plus-half: $stache-padding + $stache-padding-half !default;
+
 $stache-margin: 10px !default;
+$stache-margin-half: $stache-margin / 2 !default;
+$stache-margin-plus-half: $stache-margin + $stache-margin-half !default;
 
 $stache-grid-columns: 12 !default;
 $stache-grid-gutter: 15px !default;
@@ -33,4 +38,6 @@ $stache-screen-sm-max: $stache-screen-md-min - 1 !default;
 $stache-screen-md-max: $stache-screen-lg-min - 1 !default;
 
 $stache-omnibar-height: 50px !default;
+
 $stache-sidebar-column-width: 260px !default;
+$stache-sidebar-z-index: 1000 !default;
