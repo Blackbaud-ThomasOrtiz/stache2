@@ -1,5 +1,4 @@
 <div class="sidebar-layout-container">
-
   <stache-layout-blank identifier="sidebar">
     <stache-container>
 
@@ -29,20 +28,8 @@
     </stache-container>
   </stache-layout-blank>
 
-  <div id="stache-sidebar-wrapper" [ngClass]="{'sidebar-closed': sidebarClosed, 'sidebar-open': !sidebarClosed  }">
-    <div class="stache-sidebar-header">
-      <button *ngIf="!sidebarClosed" class="sky-btn sky-btn-link-inline stache-sidebar-button" (click)="closeSidebar()" aria-label="sidebar close">
-        <i class="fa fa-chevron-left" aria-hidden="Close"></i>
-      </button>
-      <button *ngIf="sidebarClosed" class="sky-btn sky-btn-link-inline stache-sidebar-button" (click)="openSidebar()" aria-label="sidebar open">
-        <i class="fa fa-chevron-right" aria-hidden="Open"></i>
-      </button>
-    </div>
-    <div class="stache-sidebar-content-routes">
-      <stache-sidebar [routes]="sidebarRoutes">
-      </stache-sidebar>
-    </div>
-  </div>
+  <stache-sidebar-wrapper [sidebarRoutes]="sidebarRoutes">
+  </stache-sidebar-wrapper>
 
   <stache-back-to-top *ngIf="showBackToTop">
   </stache-back-to-top>
