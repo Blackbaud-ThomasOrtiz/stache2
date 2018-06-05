@@ -2,9 +2,19 @@
 
 .stache-container {
   max-width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
-/deep/
-.sky-container {
-  padding: 0 40px;
+@media (min-width: $stache-screen-sm-min) {
+  .stache-container {
+    width: $stache-screen-sm-min - 10;
+  }
+}
+
+@media (min-width: $stache-screen-md-min) {
+  .stache-container {
+    width: 100%;
+    padding: 0 calc(#{ $stache-sidebar-column-width } + 40px);
+  }
 }

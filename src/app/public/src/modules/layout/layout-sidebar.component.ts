@@ -6,7 +6,7 @@ import { InputConverter, StacheOmnibarAdapterService, StacheWindowRef } from '..
 import { StacheNavLink } from '../nav';
 import { Subject } from 'rxjs';
 
-const WINDOW_SIZE_XSMALL = 768;
+const WINDOW_SIZE_MID = 992;
 
 @Component({
   selector: 'stache-layout-sidebar',
@@ -44,8 +44,6 @@ export class StacheLayoutSidebarComponent implements StacheLayout {
 
   public sidebarClosed: boolean = false;
 
-  private sidebarClosedByUser: boolean = false;
-
   private ngUnsubscribe: Subject<any> = new Subject();
 
   constructor(
@@ -68,23 +66,21 @@ export class StacheLayoutSidebarComponent implements StacheLayout {
   }
 
   public closeSidebar() {
-    this.sidebarClosedByUser = true;
     this.sidebarClosed = true;
   }
 
   public openSidebar() {
-    this.sidebarClosedByUser = true;
     this.sidebarClosed = false;
   }
 
   private checkWindowWidth() {
     let windowWidth = this.windowRef.nativeWindow.innerWidth;
 
-    if (windowWidth < WINDOW_SIZE_XSMALL && !this.sidebarClosedByUser) {
+    if (windowWidth < WINDOW_SIZE_MID) {
       this.sidebarClosed = true;
     }
 
-    if (windowWidth > WINDOW_SIZE_XSMALL && !this.sidebarClosedByUser) {
+    if (windowWidth > WINDOW_SIZE_MID) {
       this.sidebarClosed = false;
     }
   }

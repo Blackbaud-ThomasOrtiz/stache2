@@ -60,31 +60,4 @@
       overflow-y: auto;
     }
   }
-
-  @media (min-width: 1200px) {
-    /deep/
-    .stache-container {
-      &.sky-container {
-        width: 700px;
-      }
-    }
-  }
-
-  @media (min-width: 1600px) {
-    /deep/
-    .stache-container {
-      &.sky-container {
-        width: 1000px;
-      }
-    }
-  }
-
-  @media (min-width: 1750px) {
-    /deep/
-    .stache-container {
-      &.sky-container {
-        width: 1190px;
-      }
-    }
-  }
 }
