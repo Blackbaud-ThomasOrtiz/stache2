@@ -1,13 +1,15 @@
 <stache-layout-blank identifier="sidebar">
   <stache-container>
 
+    <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
+    </stache-breadcrumbs>
+
+    <stache-edit-button *ngIf="showEditButton">
+    </stache-edit-button>
+
     <stache-row reverseColumnOrder="true">
       <stache-column screenSmall="12" screenMedium="12" screenLarge="12">
-        <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
-        </stache-breadcrumbs>
 
-        <stache-edit-button *ngIf="showEditButton">
-        </stache-edit-button>
         <stache-page-header *ngIf="pageTitle">
           <stache-page-title>
             {{pageTitle}}

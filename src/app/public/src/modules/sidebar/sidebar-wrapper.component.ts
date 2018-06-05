@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, OnDestroy, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { StacheNavLink } from '../nav';
 import { StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
@@ -20,6 +20,7 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy {
 
   constructor(
     private renderer: Renderer2,
+    private elementRef: ElementRef,
     private omnibarService: StacheOmnibarAdapterService,
     private windowRef: StacheWindowRef
   ) {
@@ -37,8 +38,8 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy {
 
   public setTopAffix(): void {
     let omnibarHeight = this.omnibarService.getHeight();
-    let sidebarWrapperEl = this.windowRef.nativeWindow.document.querySelector('#stache-sidebar-wrapper');
-    this.renderer.setStyle(sidebarWrapperEl, 'top', `${omnibarHeight}px`);
+    let wrapperElement = this.elementRef.nativeElement.querySelector('.stache-sidebar-wrapper');
+    this.renderer.setStyle(wrapperElement, 'top', `${omnibarHeight}px`);
   }
 
   public ngOnDestroy(): void {
