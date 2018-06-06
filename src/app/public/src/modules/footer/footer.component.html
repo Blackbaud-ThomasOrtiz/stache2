@@ -1,7 +1,8 @@
 <div class="stache-footer-wrapper">
-  <div class="stache-footer-content">
+  <stache-container>
+    <div class="stache-footer-content">
       <h3 *ngIf="siteName" class="stache-footer-site-name">
-        {{ siteName }}
+        <strong>{{ siteName }}</strong>
       </h3>
       <ul *ngIf="footerLinks" class="footer-link-list">
         <li *ngFor="let link of footerLinks">
@@ -9,7 +10,8 @@
         </li>
       </ul>
       <div *ngIf="copyright" class="copyright-label">
-          &copy; {{ currentDate | date: 'yyyy' }} {{ copyright }}
+        &copy; {{ currentDate | date: 'yyyy' }} {{ copyright }}
       </div>
-  </div>
+    </div>
+  </stache-container>
 </div>

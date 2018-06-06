@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
 
 import { StacheFooterComponent } from './footer.component';
+import { StacheContainerModule } from '../container';
 import { StacheLinkModule } from '../link';
 import { StacheConfigService, StacheWindowRef, StacheRouteService } from '../shared';
 
@@ -49,7 +50,8 @@ describe('StacheFooterComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        StacheLinkModule
+        StacheLinkModule,
+        StacheContainerModule
       ],
       declarations: [
         StacheFooterComponent

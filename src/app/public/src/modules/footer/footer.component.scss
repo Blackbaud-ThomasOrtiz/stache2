@@ -1,59 +1,40 @@
 @import '../../styles/_variables';
 
 .stache-footer-wrapper {
-  padding: 10px 40px;
+  // padding: 10px calc(#{ $stache-sidebar-column-width } + 40px);
   background-color: #eeeeef;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  color: $stache-text-color-deemphasized;
 
   .stache-footer-content {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     .stache-footer-site-name {
-      text-decoration: none;
       font-weight: bold;
-      color: $stache-text-color-deemphasized;
-    }
-
-    .footer-links-container {
-      display: flex;
-      min-width: 500px;
-
-      .footer-link-lists {
-        flex: 1;
-        text-align: left;
-        color: $stache-text-color-deemphasized;
-      }
-    }
-
-    .copyright-label {
-      text-align: center;
       color: $stache-text-color-deemphasized;
     }
 
     .footer-link-list {
       display: flex;
-      flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-around;
       list-style: none;
       padding: 0;
       margin-top: 0;
 
       li {
         margin: 3px 5px;
-        line-height: $stache-line-height-base;
-      }
-
-      a {
         padding: 1px 5px 1px 0;
-        display: block;
-        text-decoration: none;
+        line-height: $stache-line-height-base;
+
+        a {
+          text-decoration: none;
+        }
       }
+    }
+
+    .copyright-label {
+      text-align: center;
     }
   }
 }
