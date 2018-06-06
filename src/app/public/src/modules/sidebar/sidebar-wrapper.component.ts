@@ -58,11 +58,9 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy {
   private checkWindowWidth(): void {
     let windowWidth = this.windowRef.nativeWindow.innerWidth;
 
-    if (windowWidth < WINDOW_SIZE_MID) {
+    if (windowWidth <= WINDOW_SIZE_MID) {
       this.sidebarClosed = true;
-    }
-
-    if (windowWidth > WINDOW_SIZE_MID) {
+    } else {
       this.sidebarClosed = false;
     }
   }
