@@ -1,7 +1,7 @@
 @import '../../styles/_variables';
 
 .stache-footer-wrapper {
-  padding: 10px calc(#{ $stache-sidebar-column-width } + 40px);
+  padding: 10px 40px;
   background-color: #eeeeef;
   display: flex;
   flex-direction: column;

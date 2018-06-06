@@ -1,12 +1,14 @@
-
 <stache-layout-blank identifier="sidebar">
-  <div class="sidebar-layout-wrapper">
-      <div class="sidebar-layout-columns sidebar-layout-content-column">
-        <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
-        </stache-breadcrumbs>
+  <stache-container>
 
-        <stache-edit-button *ngIf="showEditButton">
-        </stache-edit-button>
+    <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
+    </stache-breadcrumbs>
+
+    <stache-edit-button *ngIf="showEditButton">
+    </stache-edit-button>
+
+    <stache-row reverseColumnOrder="true">
+      <stache-column screenSmall="8" screenMedium="9" screenLarge="10">
 
         <stache-page-header *ngIf="pageTitle">
           <stache-page-title>
@@ -21,18 +23,21 @@
         </stache-table-of-contents>
 
         <ng-content></ng-content>
-    </div>
-    <stache-affix>
-      <div class="sidebar-layout-sidebar-column sidebar-layout-columns">
-        <div class="side-bar-layout-inner-sidebar">
-        <stache-sidebar [routes]="sidebarRoutes">
-        </stache-sidebar>
-      </div>
-      </div>
-    </stache-affix>
-  </div>
-  <stache-back-to-top *ngIf="showBackToTop">
-  </stache-back-to-top>
+
+      </stache-column>
+      <stache-column screenSmall="4" screenMedium="3" screenLarge="2">
+
+        <stache-affix>
+          <stache-sidebar [routes]="sidebarRoutes">
+          </stache-sidebar>
+        </stache-affix>
+
+      </stache-column>
+    </stache-row>
+  </stache-container>
   <stache-footer *ngIf="showFooter">
   </stache-footer>
 </stache-layout-blank>
+
+<stache-back-to-top *ngIf="showBackToTop">
+</stache-back-to-top>

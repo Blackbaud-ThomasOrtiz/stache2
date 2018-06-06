@@ -48,7 +48,7 @@ export class StacheAffixComponent implements AfterViewInit, OnDestroy {
   public getStyles(): any {
     return {
       'min-height': this.getCssMinHeight(),
-      'width': this.getCssMaxWidth(),
+      'max-width': this.getCssMaxWidth(),
       position: this.getCssPosition()
     };
   }
