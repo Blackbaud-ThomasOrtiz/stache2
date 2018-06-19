@@ -14,7 +14,9 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy {
   @Input()
   public sidebarRoutes: StacheNavLink[];
 
-  public sidebarClosed: boolean = false;
+  public sidebarOpen: boolean = false;
+
+  public sidebarLabel: string = 'Click to open sidebar';
 
   private ngUnsubscribe: Subject<any> = new Subject();
 
@@ -28,12 +30,14 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(() => {
         this.checkWindowWidth();
+        this.updateAriaLabel();
       });
   }
 
   public ngOnInit(): void {
     this.setTopAffix();
     this.checkWindowWidth();
+    this.updateAriaLabel();
   }
 
   public setTopAffix(): void {
@@ -47,21 +51,22 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  public closeSidebar(): void {
-    this.sidebarClosed = true;
+  public toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
+    this.updateAriaLabel();
   }
 
-  public openSidebar(): void {
-    this.sidebarClosed = false;
+  public updateAriaLabel(): void {
+    this.sidebarLabel = this.sidebarOpen ? 'Click to close sidebar' : 'Click to open sidebar';
   }
 
   private checkWindowWidth(): void {
     let windowWidth = this.windowRef.nativeWindow.innerWidth;
 
     if (windowWidth <= WINDOW_SIZE_MID) {
-      this.sidebarClosed = true;
+      this.sidebarOpen = false;
     } else {
-      this.sidebarClosed = false;
+      this.sidebarOpen = true;
     }
   }
 }

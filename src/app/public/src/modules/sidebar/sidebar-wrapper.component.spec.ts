@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import { expect } from '@blackbaud/skyux-lib-testing';
 
 import { StacheSidebarWrapperComponent } from './sidebar-wrapper.component';
 import { StacheSidebarComponent } from './sidebar.component';
@@ -100,6 +100,7 @@ describe('StacheSidebarWrapperComponent', () => {
 
     fixture = TestBed.createComponent(StacheSidebarWrapperComponent);
     component = fixture.componentInstance;
+    component.sidebarRoutes = mockRouteService.getActiveRoutes();
   });
 
   it('should render the component', () => {
@@ -118,34 +119,39 @@ describe('StacheSidebarWrapperComponent', () => {
   });
 
   it('should open and close the sidebar', () => {
-    expect(component.sidebarClosed).toEqual(false);
-    component.closeSidebar();
-    expect(component.sidebarClosed).toEqual(true);
-    component.openSidebar();
-    expect(component.sidebarClosed).toEqual(false);
+    expect(component.sidebarOpen).toEqual(false);
+    component.toggleSidebar();
+    expect(component.sidebarOpen).toEqual(true);
+    component.toggleSidebar();
+    expect(component.sidebarOpen).toEqual(false);
   });
 
   it('should close the sidebar when the window size is below the WINDOW_SIZE_MID', () => {
-    expect(component.sidebarClosed).toBe(false);
+    component.sidebarOpen = true;
     mockWindowRef.nativeWindow.innerWidth = 10;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.sidebarClosed).toBe(true);
+    expect(component.sidebarOpen).toBe(false);
   });
 
   it('should open the sidebar when the window size is above the WINDOW_SIZE_MID', () => {
-    component.sidebarClosed = true;
+    component.sidebarOpen = false;
     mockWindowRef.nativeWindow.innerWidth = 1000;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.sidebarClosed).toBe(false);
+    expect(component.sidebarOpen).toBe(true);
   });
 
   it('should call the check the window width on window resize', () => {
-    component.sidebarClosed = false;
+    component.sidebarOpen = false;
     mockWindowRef.nativeWindow.innerWidth = 10;
     mockWindowRef.onResize$.next();
     fixture.detectChanges();
-    expect(component.sidebarClosed).toBe(true);
+    expect(component.sidebarOpen).toBe(false);
   });
+
+  it('should be accessible', async(() => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement).toBeAccessible();
+  }));
 });

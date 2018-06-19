@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="stache-sidebar-wrapper" [ngClass]="{'sidebar-closed': sidebarClosed, 'sidebar-open': !sidebarClosed  }">
   <div class="stache-sidebar-header">
     <button *ngIf="!sidebarClosed" class="sky-btn sky-btn-link-inline stache-sidebar-button" (click)="closeSidebar()" aria-label="sidebar close">
@@ -8,6 +9,30 @@
     </button>
   </div>
   <div class="stache-sidebar-content">
+=======
+<div class="stache-sidebar-wrapper"
+  aria-label="Sidebar Navigation"
+  [ngClass]="{
+    'sidebar-closed': !sidebarOpen,
+    'sidebar-open': sidebarOpen  }">
+
+  <div class="stache-sidebar-buttons">
+    <button
+      type="button"
+      class="sky-btn sky-btn-default stache-sidebar-button"
+      (click)="toggleSidebar()"
+      aria-controls="stache-sidebar-content-panel"
+      [attr.aria-expanded]="sidebarOpen"
+      [attr.aria-label]="sidebarLabel">
+
+      <i *ngIf="sidebarOpen" class="fa fa-chevron-left" aria-hidden="true"></i>
+      <i *ngIf="!sidebarOpen" class="fa fa-chevron-right" aria-hidden="true"></i>
+
+    </button>
+  </div>
+
+  <div id="stache-sidebar-content-panel" class="stache-sidebar-content">
+>>>>>>> 8642187bbff9d24dd841411ef3401b803720af6d
     <stache-sidebar [routes]="sidebarRoutes">
     </stache-sidebar>
   </div>
