@@ -1,38 +1,18 @@
 @import '../../styles/_variables';
 
 .stache-sidebar-wrapper {
-<<<<<<< HEAD
-  display: flex;
-  flex-direction: column;
-=======
->>>>>>> 8642187bbff9d24dd841411ef3401b803720af6d
   position: fixed;
   z-index: $stache-sidebar-z-index;
   bottom: 0;
   left: 0;
-<<<<<<< HEAD
-  border-right: 1px solid #cdcfd2;
-  box-shadow: 0px -2px 5px 0 rgba(0, 0, 0, 0.3);
-=======
   border-right: 1px solid $stache-border-color-neutral-medium;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
->>>>>>> 8642187bbff9d24dd841411ef3401b803720af6d
 
   &.sidebar-closed {
     border-right: none;
     box-shadow: none;
     transition: 300ms;
 
-<<<<<<< HEAD
-    .stache-sidebar-header {
-      transition: 300ms;
-      border-bottom-right-radius: $stache-border-radius;
-      border-top-right-radius: $stache-border-radius;
-      border-right: 1px solid #cdcfd2;
-      border-bottom: 1px solid #cdcfd2;
-      box-shadow: 0px -2px 5px 0 rgba(0, 0, 0, 0.3);
-      padding: 8px $stache-padding;
-=======
     .stache-sidebar-buttons {
       transition: 300ms;
       right: -36px;
@@ -40,22 +20,18 @@
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
       border-left: none;
->>>>>>> 8642187bbff9d24dd841411ef3401b803720af6d
     }
 
     .stache-sidebar-content {
       transition: 300ms;
       margin-left: -$stache-sidebar-column-width;
     }
-<<<<<<< HEAD
-=======
 
     .stache-sidebar-button {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
       border-left: none;
     }
->>>>>>> 8642187bbff9d24dd841411ef3401b803720af6d
   }
 
   &.sidebar-open {
@@ -65,32 +41,10 @@
     }
   }
 
-<<<<<<< HEAD
-  .stache-sidebar-header {
-    display: flex;
-    justify-content: flex-end;
-    background-color: $stache-background-color-neutral-light;
-    height: 50px;
-    padding: 8px $stache-padding-plus-half;
-
-    .stache-sidebar-button {
-      color: inherit;
-    }
-  }
-
-=======
->>>>>>> 8642187bbff9d24dd841411ef3401b803720af6d
   .stache-sidebar-content {
     background-color: #fff;
     width: $stache-sidebar-column-width;
     padding: $stache-padding-plus-half;
-<<<<<<< HEAD
-    padding-bottom: $stache-padding * 2;
-    height: calc(100% - 50px);
-    overflow-y: auto;
-  }
-}
-=======
     padding-top: $stache-padding-half;
     padding-bottom: $stache-padding * 2;
     height: 100%;
@@ -120,4 +74,3 @@
   }
 }
 
->>>>>>> 8642187bbff9d24dd841411ef3401b803720af6d
