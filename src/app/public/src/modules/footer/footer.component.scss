@@ -2,7 +2,7 @@
 
 .stache-footer-wrapper {
   // padding: 10px calc(#{ $stache-sidebar-column-width } + 40px);
-  background-color: #eeeeef;
+  background-color: $stache-background-color-neutral-light;
   color: $stache-text-color-deemphasized;
 
   .stache-footer-content {
@@ -29,6 +29,7 @@
 
         a {
           text-decoration: none;
+          color: #007399;
         }
       }
     }

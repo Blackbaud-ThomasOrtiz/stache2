@@ -1,14 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
+import { expect } from '@blackbaud/skyux-lib-testing';
 
 import { StacheFooterComponent } from './footer.component';
 import { StacheContainerModule } from '../container';
 import { StacheLinkModule } from '../link';
 import { StacheConfigService, StacheWindowRef, StacheRouteService } from '../shared';
 
-describe('StacheFooterComponent', () => {
+fdescribe('StacheFooterComponent', () => {
   let component: StacheFooterComponent;
   let fixture: ComponentFixture<StacheFooterComponent>;
   let mockConfigService: any;
@@ -93,4 +92,9 @@ describe('StacheFooterComponent', () => {
 
     expect(component.siteName).toBe(undefined);
   });
+
+  it('should be accessible', async(() => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement).toBeAccessible();
+  }));
 });
