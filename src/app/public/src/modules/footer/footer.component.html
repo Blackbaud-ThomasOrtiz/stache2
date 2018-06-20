@@ -4,13 +4,8 @@
       <h3 *ngIf="siteName" class="stache-footer-site-name">
         <strong>{{ siteName }}</strong>
       </h3>
-      <nav>
-        <ul *ngIf="footerLinks" class="footer-link-list">
-          <li *ngFor="let link of footerLinks">
-            <a stacheRouterLink="{{ link.route }}">{{ link.title }}</a>
-          </li>
-        </ul>
-      </nav>
+      <stache-nav navType="footer" [routes]="footerLinks">
+      </stache-nav>
       <div *ngIf="copyright" class="copyright-label">
         &copy; {{ currentDate | date: 'yyyy' }} {{ copyright }}
       </div>

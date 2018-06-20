@@ -1,7 +1,6 @@
 @import '../../styles/_variables';
 
 .stache-footer-wrapper {
-  // padding: 10px calc(#{ $stache-sidebar-column-width } + 40px);
   background-color: $stache-background-color-neutral-light;
   color: $stache-text-color-deemphasized;
 
@@ -15,21 +14,26 @@
       color: $stache-text-color-deemphasized;
     }
 
-    .footer-link-list {
+    ::ng-deep
+    .stache-nav-footer {
       display: flex;
       flex-wrap: wrap;
       list-style: none;
       padding: 0;
-      margin-top: 0;
+      margin-bottom: $stache-margin;
 
-      li {
-        margin: 3px 5px;
-        padding: 1px 5px 1px 0;
-        line-height: $stache-line-height-base;
+      .stache-nav-list {
+        flex-direction: row;
+        flex-wrap: wrap;
 
-        a {
-          text-decoration: none;
-          color: #007399;
+        .stache-nav-list-item {
+          margin: 3px 5px;
+          padding: 1px 5px 1px 0;
+          line-height: $stache-line-height-base;
+
+          .stache-nav-anchor {
+            color: #007399;
+          }
         }
       }
     }

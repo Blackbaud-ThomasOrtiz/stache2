@@ -4,7 +4,7 @@ import { expect } from '@blackbaud/skyux-lib-testing';
 
 import { StacheFooterComponent } from './footer.component';
 import { StacheContainerModule } from '../container';
-import { StacheLinkModule } from '../link';
+import { StacheNavModule } from '../nav';
 import { StacheConfigService, StacheWindowRef, StacheRouteService } from '../shared';
 
 fdescribe('StacheFooterComponent', () => {
@@ -49,7 +49,7 @@ fdescribe('StacheFooterComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        StacheLinkModule,
+        StacheNavModule,
         StacheContainerModule
       ],
       declarations: [
@@ -73,9 +73,23 @@ fdescribe('StacheFooterComponent', () => {
   it('should update the footer settings based on the skyux config', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.footerLinks).toBe(footerConfig.nav);
+    expect(component.footerLinks).toExist();
     expect(component.copyright).toBe(footerConfig.copyright);
     expect(component.siteName).toBe(mockConfigService.skyux.name);
+  });
+
+  it('should map the footerLinks from the skyux config to stacheNavLinks', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    let mappedFooterLinks = footerConfig.nav.map((navItem: any) => {
+      return {
+        name: navItem.title,
+        path: navItem.route
+      };
+    });
+
+    expect(component.footerLinks).toEqual(mappedFooterLinks);
   });
 
   it('should provide defaults if no values are supplied', () => {
@@ -85,7 +99,7 @@ fdescribe('StacheFooterComponent', () => {
     fixture.detectChanges();
 
     expect(component.footerLinks).not.toEqual(footerConfig.nav);
-    expect(component.footerLinks).toBe(undefined);
+    expect(component.footerLinks).toEqual([]);
 
     expect(component.copyright).not.toEqual(footerConfig.copyright);
     expect(component.copyright).toEqual('Blackbaud, Inc. All rights reserved.');

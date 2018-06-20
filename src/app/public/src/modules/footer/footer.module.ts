@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { StacheFooterComponent } from './footer.component';
 
-import { StacheLinkModule } from '../link';
+import { StacheNavModule } from '../nav';
 import { StacheContainerModule } from '../container';
 
 @NgModule({
@@ -12,8 +12,8 @@ import { StacheContainerModule } from '../container';
   ],
   imports: [
     CommonModule,
-    StacheLinkModule,
-    StacheContainerModule
+    StacheContainerModule,
+    StacheNavModule
   ],
   exports: [
     StacheFooterComponent
