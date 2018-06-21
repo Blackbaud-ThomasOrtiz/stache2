@@ -23,10 +23,6 @@ export class StacheLayoutSidebarComponent implements StacheLayout {
 
   @Input()
   @InputConverter()
-  public showFooter: boolean;
-
-  @Input()
-  @InputConverter()
   public showBackToTop: boolean;
 
   @Input()

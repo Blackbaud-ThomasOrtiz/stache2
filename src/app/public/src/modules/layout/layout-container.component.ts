@@ -19,9 +19,6 @@ export class StacheLayoutContainerComponent implements StacheLayout {
   public inPageRoutes: StacheNavLink[];
 
   @Input()
-  public showFooter: boolean;
-
-  @Input()
   @InputConverter()
   public showBackToTop: boolean;
 
