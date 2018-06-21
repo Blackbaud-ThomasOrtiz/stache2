@@ -53,13 +53,13 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
         this.renderer.addClass(container, CONTAINER_SIDEBAR_CLASSNAME);
       });
     }
-    this.wrapperHeight = this.windowRef.nativeWindow.document.querySelector('.stache-wrapper').offsetTop - this.omnibarService.getHeight();
+    this.wrapperHeight = this.windowRef.nativeWindow.document.querySelector('.stache-sidebar-layout-wrapper').offsetTop - this.omnibarService.getHeight();
+    console.log(this.wrapperHeight);
     this.footerElement = this.windowRef.nativeWindow.document.querySelector('.stache-footer-wrapper');
   }
 
   public setTopAffix(): void {
     let omnibarHeight = this.omnibarService.getHeight();
-    console.log(this.footerElement.offsetTop);
     let wrapperElement = this.elementRef.nativeElement.querySelector('.stache-sidebar-wrapper');
     this.renderer.setStyle(wrapperElement, 'position', `fixed`);
     this.renderer.setStyle(wrapperElement, 'top', `${omnibarHeight}px`);

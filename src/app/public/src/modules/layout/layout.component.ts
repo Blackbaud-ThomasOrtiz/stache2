@@ -5,7 +5,8 @@ import { StacheNavLink } from '../nav';
 
 @Component({
   selector: 'stache-layout',
-  templateUrl: './layout.component.html'
+  templateUrl: './layout.component.html',
+  styleUrls: ['./layout.component.scss']
 })
 export class StacheLayoutComponent implements OnInit, StacheLayout {
   @Input()
