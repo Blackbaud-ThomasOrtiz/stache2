@@ -13,6 +13,7 @@ import { StacheTitleService } from './title.service';
 import { StacheConfigService, StacheJsonDataService, StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
 import { StacheNavLink, StacheNavService } from '../nav';
 import { StachePageAnchorService } from '../page-anchor/page-anchor.service';
+import { InputConverter } from '../../../../../../dist';
 
 const _get = require('lodash.get');
 
@@ -47,6 +48,7 @@ export class StacheWrapperComponent implements OnInit, OnDestroy, AfterViewInit 
   public showEditButton: boolean = this.checkEditButtonUrl();
 
   @Input()
+  @InputConverter()
   public showFooter: boolean = this.checkFooterData();
 
   @Input()
