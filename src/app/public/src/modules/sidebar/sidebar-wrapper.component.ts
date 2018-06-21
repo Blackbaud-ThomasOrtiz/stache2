@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, OnDestroy, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, OnDestroy, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { Subject } from 'rxjs';
 import { StacheNavLink } from '../nav';
 import { StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
@@ -23,6 +23,10 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   private stacheContainers: HTMLElement[];
 
+  private wrapperHeight: any;
+
+  private footerElement: any;
+
   constructor(
     private renderer: Renderer2,
     private elementRef: ElementRef,
@@ -38,7 +42,6 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
   }
 
   public ngOnInit(): void {
-    this.setTopAffix();
     this.checkWindowWidth();
     this.updateAriaLabel();
   }
@@ -50,12 +53,18 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
         this.renderer.addClass(container, CONTAINER_SIDEBAR_CLASSNAME);
       });
     }
+    this.wrapperHeight = this.windowRef.nativeWindow.document.querySelector('.stache-wrapper').offsetTop - this.omnibarService.getHeight();
+    this.footerElement = this.windowRef.nativeWindow.document.querySelector('.stache-footer-wrapper');
   }
 
   public setTopAffix(): void {
     let omnibarHeight = this.omnibarService.getHeight();
+    console.log(this.footerElement.offsetTop);
     let wrapperElement = this.elementRef.nativeElement.querySelector('.stache-sidebar-wrapper');
+    this.renderer.setStyle(wrapperElement, 'position', `fixed`);
     this.renderer.setStyle(wrapperElement, 'top', `${omnibarHeight}px`);
+    let maxHeight = this.footerElement.offsetTop - this.windowRef.nativeWindow.pageYOffset - omnibarHeight;
+    this.renderer.setStyle(wrapperElement, 'max-height', `${maxHeight}px`);
   }
 
   public ngOnDestroy(): void {
@@ -84,6 +93,23 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
       this.sidebarOpen = false;
     } else {
       this.sidebarOpen = true;
+    }
+  }
+
+  private resetElement() {
+    let wrapperElement = this.elementRef.nativeElement.querySelector('.stache-sidebar-wrapper');
+    this.renderer.setStyle(wrapperElement, 'position', `absolute`);
+    this.renderer.setStyle(wrapperElement, 'top', `0`);
+  }
+
+  @HostListener('window:scroll')
+  public onWindowScroll(): void {
+    const omnibarHeight = this.omnibarService.getHeight();
+    let windowHeight = this.windowRef.nativeWindow.pageYOffset;
+    if (this.wrapperHeight <= windowHeight) {
+      this.setTopAffix();
+    } else {
+      this.resetElement()
     }
   }
 }
