@@ -8,6 +8,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 475px;
+    margin: 0 auto;
+    padding: 0 $stache-padding-plus-half $stache-padding;
 
     .stache-footer-site-name {
       font-weight: bold;
@@ -40,6 +43,14 @@
 
     .copyright-label {
       text-align: center;
+    }
+  }
+}
+
+@media (min-width: $stache-screen-lg-min) {
+  .stache-footer-wrapper {
+    .stache-footer-content {
+      max-width: 700px;
     }
   }
 }

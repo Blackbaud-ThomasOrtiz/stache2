@@ -21,7 +21,7 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   private ngUnsubscribe: Subject<any> = new Subject();
 
-  private stacheContainer: HTMLElement;
+  private stacheContainers: HTMLElement[];
 
   constructor(
     private renderer: Renderer2,
@@ -44,9 +44,11 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
   }
 
   public ngAfterViewInit(): void {
-    this.stacheContainer = this.windowRef.nativeWindow.document.querySelector('.stache-container');
-    if (this.stacheContainer) {
-      this.renderer.addClass(this.stacheContainer, CONTAINER_SIDEBAR_CLASSNAME);
+    this.stacheContainers = this.windowRef.nativeWindow.document.querySelectorAll('.stache-container');
+    if (this.stacheContainers) {
+      this.stacheContainers.forEach((container: HTMLElement) => {
+        this.renderer.addClass(container, CONTAINER_SIDEBAR_CLASSNAME);
+      });
     }
   }
 
@@ -57,8 +59,10 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
   }
 
   public ngOnDestroy(): void {
-    if (this.stacheContainer) {
-      this.renderer.removeClass(this.stacheContainer, CONTAINER_SIDEBAR_CLASSNAME);
+    if (this.stacheContainers) {
+      this.stacheContainers.forEach((container: HTMLElement) => {
+        this.renderer.removeClass(container, CONTAINER_SIDEBAR_CLASSNAME);
+      });
     }
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
