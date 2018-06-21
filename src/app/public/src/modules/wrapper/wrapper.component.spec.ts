@@ -113,9 +113,6 @@ describe('StacheWrapperComponent', () => {
           return id;
         }),
         querySelector: jasmine.createSpy('querySelector').and.callFake(function(selector: string) {
-          if (selector === '.stache-container') {
-            return document.createElement('div');
-          }
           return {
             textContent: mockTextContent,
             classList: {
@@ -126,6 +123,10 @@ describe('StacheWrapperComponent', () => {
           };
         }),
         querySelectorAll: jasmine.createSpy('querySelectorAll').and.callFake((selector: string): any[] => {
+          if (selector === '.stache-container') {
+            let mockDiv = document.createElement('div');
+            return [mockDiv];
+          }
             return [];
         })
       },

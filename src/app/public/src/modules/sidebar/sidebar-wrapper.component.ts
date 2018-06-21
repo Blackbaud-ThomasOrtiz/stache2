@@ -45,7 +45,7 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   public ngAfterViewInit(): void {
     this.stacheContainers = this.windowRef.nativeWindow.document.querySelectorAll('.stache-container');
-    if (this.stacheContainers) {
+    if (this.stacheContainers && this.stacheContainers.length) {
       this.stacheContainers.forEach((container: HTMLElement) => {
         this.renderer.addClass(container, CONTAINER_SIDEBAR_CLASSNAME);
       });
@@ -59,7 +59,7 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
   }
 
   public ngOnDestroy(): void {
-    if (this.stacheContainers) {
+    if (this.stacheContainers && this.stacheContainers.length) {
       this.stacheContainers.forEach((container: HTMLElement) => {
         this.renderer.removeClass(container, CONTAINER_SIDEBAR_CLASSNAME);
       });

@@ -65,9 +65,14 @@ describe('StacheSidebarWrapperComponent', () => {
      innerWidth: windowWidth,
      document: {
         querySelector() {
-          return mockElement;
+          return fixture.debugElement.nativeElement.query(By.css('.stache-sidebar-wrapper'));
         },
-        querySelectorAll() {}
+        querySelectorAll() {
+          if (mockElement) {
+            return [mockElement];
+          }
+          return;
+        }
       }
     };
 

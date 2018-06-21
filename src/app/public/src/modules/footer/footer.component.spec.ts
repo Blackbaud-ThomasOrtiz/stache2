@@ -7,7 +7,7 @@ import { StacheContainerModule } from '../container';
 import { StacheNavModule } from '../nav';
 import { StacheConfigService, StacheWindowRef, StacheRouteService } from '../shared';
 
-fdescribe('StacheFooterComponent', () => {
+describe('StacheFooterComponent', () => {
   let component: StacheFooterComponent;
   let fixture: ComponentFixture<StacheFooterComponent>;
   let mockConfigService: any;
