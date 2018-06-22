@@ -24,18 +24,8 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   private stacheContainers: HTMLElement[];
 
-  private layoutWrapper: HTMLElement;
-
-  private sidebarWrapper: HTMLElement;
-
-  private footerWrapper: HTMLElement;
-
-  private isAffixed: boolean = false;
-
   constructor(
     private renderer: Renderer2,
-    private elementRef: ElementRef,
-    private omnibarService: StacheOmnibarAdapterService,
     private windowRef: StacheWindowRef
   ) {
     this.windowRef.onResize$
@@ -53,26 +43,12 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   public ngAfterViewInit(): void {
     this.stacheContainers = this.windowRef.nativeWindow.document.querySelectorAll('.stache-container');
-    this.sidebarWrapper = this.elementRef.nativeElement.querySelector('.stache-sidebar-wrapper');
-    this.layoutWrapper = this.windowRef.nativeWindow.document.querySelector('.stache-layout-wrapper');
-    this.footerWrapper = this.windowRef.nativeWindow.document.querySelector('.stache-footer-wrapper');
     this.addClassToContainers();
   }
 
   public toggleSidebar(): void {
     this.sidebarOpen = !this.sidebarOpen;
     this.updateAriaLabel();
-  }
-
-  @HostListener('window:scroll')
-  public onWindowScroll(): void {
-    const omnibarHeight = this.omnibarService.getHeight();
-    let windowHeight = this.windowRef.nativeWindow.pageYOffset;
-    if ((this.layoutWrapper.offsetTop - omnibarHeight) <= windowHeight) {
-      this.affixSidebar();
-    } else {
-      this.resetSidebar()
-    }
   }
 
   private checkWindowWidth(): void {
@@ -102,30 +78,6 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
       this.stacheContainers.forEach((container: HTMLElement) => {
         this.renderer.removeClass(container, CONTAINER_SIDEBAR_CLASSNAME);
       });
-    }
-  }
-
-  private affixSidebar(): void {
-    let omnibarHeight = this.omnibarService.getHeight();
-    let maxHeight = '100%'
-    if (this.footerWrapper) {
-      maxHeight = `${(this.footerWrapper.offsetTop || 0) - this.windowRef.nativeWindow.pageYOffset - omnibarHeight}px`;
-    }
-
-    this.renderer.setStyle(this.sidebarWrapper, 'max-height', `${maxHeight}`);
-
-    if (!this.isAffixed) {
-      this.isAffixed = true;
-      this.renderer.setStyle(this.sidebarWrapper, 'position', `fixed`);
-      this.renderer.setStyle(this.sidebarWrapper, 'top', `${omnibarHeight}px`);
-    }
-  }
-
-  private resetSidebar(): void {
-    if (this.isAffixed) {
-      this.isAffixed = false;
-      this.renderer.setStyle(this.sidebarWrapper, 'position', `absolute`);
-      this.renderer.setStyle(this.sidebarWrapper, 'top', `0`);
     }
   }
 
