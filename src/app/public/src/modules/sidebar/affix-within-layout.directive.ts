@@ -41,21 +41,16 @@ export class StacheAffixWithinLayoutDirective implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit(): void {
     this.element = this.elementRef.nativeElement;
     this.omnibarHeight = this.omnibarService.getHeight();
     this.layoutWrapper = this.windowRef.nativeWindow.document.querySelector('.stache-layout-wrapper');
     this.footerWrapper = this.windowRef.nativeWindow.document.querySelector('.stache-footer-wrapper');
+    this.setMaxHeight();
   }
 
   private affixSidebar(): void {
-    let maxHeight = '100%'
-
-    if (this.footerWrapper && this.footerIsVisible()) {
-      maxHeight = `${this.footerWrapper.offsetTop - this.windowRef.nativeWindow.pageYOffset - this.omnibarHeight}px`;
-    }
-
-    this.renderer.setStyle(this.element, 'max-height', `${maxHeight}`);
+    this.setMaxHeight();
 
     if (!this.isAffixed) {
       this.isAffixed = true;
@@ -63,6 +58,16 @@ export class StacheAffixWithinLayoutDirective implements AfterViewInit {
       this.renderer.setStyle(this.element, 'top', `${this.omnibarHeight}px`);
       this.renderer.addClass(this.element, AFFIX_CLASS_NAME);
     }
+  }
+
+  private setMaxHeight() {
+    let maxHeight = `calc(100% - ${this.omnibarHeight}px)`;
+
+    if (this.footerIsVisible()) {
+      maxHeight = `${this.footerWrapper.offsetTop - this.windowRef.nativeWindow.pageYOffset - this.omnibarHeight}px`;
+    }
+
+    this.renderer.setStyle(this.element, 'max-height', `${maxHeight}`);
   }
 
   private resetSidebar(): void {
@@ -75,6 +80,11 @@ export class StacheAffixWithinLayoutDirective implements AfterViewInit {
   }
 
   private  footerIsVisible(): boolean {
-    return (this.footerWrapper.getBoundingClientRect().top <= this.windowRef.nativeWindow.innerHeight);
+
+    if (this.footerWrapper) {
+      return (this.footerWrapper.getBoundingClientRect().top <= this.windowRef.nativeWindow.innerHeight);
+    }
+
+    return false;
   }
 }
