@@ -1,8 +1,7 @@
-import { Component, Input, OnInit, Renderer2, OnDestroy, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { StacheNavLink } from '../nav';
-import { StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
-import { ENGINE_METHOD_CIPHERS } from 'constants';
+import { StacheWindowRef } from '../shared';
 
 const WINDOW_SIZE_MID: number = 992;
 const CONTAINER_SIDEBAR_CLASSNAME: string  = 'stache-container-sidebar';

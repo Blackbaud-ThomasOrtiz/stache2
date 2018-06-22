@@ -14,8 +14,8 @@ import { StachePageHeaderModule } from '../page-header';
 import { StachePageAnchorModule } from '../page-anchor';
 import { StachePageSummaryModule } from '../page-summary';
 import { StacheFooterModule } from '../footer';
-import { StacheContainerModule } from '../container';
 
+import { StacheContainerComponent } from './container.component';
 import { StacheLayoutComponent } from './layout.component';
 import { StacheLayoutBlankComponent } from './layout-blank.component';
 import { StacheLayoutContainerComponent } from './layout-container.component';
@@ -36,14 +36,14 @@ import { StacheLayoutSidebarComponent } from './layout-sidebar.component';
     StachePageSummaryModule,
     StachePageHeaderModule,
     StachePageAnchorModule,
-    StacheContainerModule,
     StacheFooterModule
   ],
   declarations: [
     StacheLayoutComponent,
     StacheLayoutBlankComponent,
     StacheLayoutContainerComponent,
-    StacheLayoutSidebarComponent
+    StacheLayoutSidebarComponent,
+    StacheContainerComponent
   ],
   exports: [
     StacheLayoutComponent

@@ -20,7 +20,7 @@ import {
 import { RouterLinkStubDirective } from './fixtures/router-link-stub.directive';
 import { StacheLinkModule } from '../link';
 
-describe('StacheSidebarWrapperComponent', () => {
+fdescribe('StacheSidebarWrapperComponent', () => {
   const CONTAINER_SIDEBAR_CLASSNAME = 'stache-container-sidebar';
   let component: StacheSidebarWrapperComponent;
   let fixture: ComponentFixture<StacheSidebarWrapperComponent>;

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { StacheFooterComponent } from './footer.component';
 
 import { StacheNavModule } from '../nav';
-import { StacheContainerModule } from '../container';
 
 @NgModule({
   declarations: [
@@ -12,7 +11,6 @@ import { StacheContainerModule } from '../container';
   ],
   imports: [
     CommonModule,
-    StacheContainerModule,
     StacheNavModule
   ],
   exports: [
