@@ -3,14 +3,7 @@
 .stache-layout {
   padding: 20px 0;
   background-color: #fff;
-  min-height: 100vh;
-}
-
-::ng-deep
-.stache-omnibar-enabled {
-  .stache-layout {
-    min-height: calc(100vh - #{$stache-omnibar-height});
-  }
+  min-height: 100%;
 }
 
 .stache-layout-blank {

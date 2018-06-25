@@ -48,3 +48,8 @@
     text-align: right;
   }
 }
+
+::ng-deep
+.sky-omnibar-iframe-session-watcher {
+  display: none;
+}

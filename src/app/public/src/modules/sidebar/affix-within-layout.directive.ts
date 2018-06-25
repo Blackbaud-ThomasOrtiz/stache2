@@ -46,7 +46,6 @@ export class StacheAffixWithinLayoutDirective implements AfterViewInit {
     this.omnibarHeight = this.omnibarService.getHeight();
     this.layoutWrapper = this.windowRef.nativeWindow.document.querySelector('.stache-layout-wrapper');
     this.footerWrapper = this.windowRef.nativeWindow.document.querySelector('.stache-footer-wrapper');
-    this.setMaxHeight();
   }
 
   private affixSidebar(): void {
@@ -61,7 +60,7 @@ export class StacheAffixWithinLayoutDirective implements AfterViewInit {
   }
 
   private setMaxHeight() {
-    let maxHeight = `calc(100% - ${this.omnibarHeight}px)`;
+    let maxHeight = `100%`;
 
     if (this.footerIsVisible()) {
       maxHeight = `${this.footerWrapper.offsetTop - this.windowRef.nativeWindow.pageYOffset - this.omnibarHeight}px`;
@@ -80,9 +79,8 @@ export class StacheAffixWithinLayoutDirective implements AfterViewInit {
   }
 
   private  footerIsVisible(): boolean {
-
     if (this.footerWrapper) {
-      return (this.footerWrapper.getBoundingClientRect().top <= this.windowRef.nativeWindow.innerHeight);
+      return (this.footerWrapper.getBoundingClientRect().top <= (this.windowRef.nativeWindow.innerHeight));
     }
 
     return false;
