@@ -1,13 +1,19 @@
 @import '../../styles/_variables';
 
+
 .stache-sidebar-wrapper {
-  position: absolute;
+  position: absolute !important;
   z-index: $stache-sidebar-z-index;
   left: 0;
   top: 0;
   bottom: 0;
   border-right: 1px solid $stache-border-color-neutral-medium;
   height: 100%;
+
+  ::ng-deep
+  &.stache-affix-top {
+    position: fixed !important;
+  }
 
   &.sidebar-closed {
     border-right: none;

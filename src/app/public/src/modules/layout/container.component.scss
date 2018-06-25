@@ -21,7 +21,6 @@
 
   // stache-container-sidebar class is added by the sidebar-wrapper component.
   .stache-container.stache-container-sidebar {
-    transition: 300ms;
     padding-left: calc( #{ $stache-sidebar-column-width } + #{ $stache-container-mobile-padding });
   }
 }

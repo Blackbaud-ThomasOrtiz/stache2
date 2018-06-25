@@ -15,6 +15,8 @@ export class StacheAffixTopDirective implements AfterViewInit {
   public static readonly AFFIX_CLASS_NAME: string = 'stache-affix-top';
   public isAffixed = false;
 
+  private footerWrapper: HTMLElement;
+  private omnibarHeight: number = 0;
   private offsetTop: number = 0;
   private element: any;
 
@@ -25,6 +27,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
     private windowRef: StacheWindowRef) { }
 
   public ngAfterViewInit(): void {
+    this.footerWrapper = this.windowRef.nativeWindow.document.querySelector('.stache-footer-wrapper');
     const nativeElement = this.elementRef.nativeElement;
 
     if (this.isComponent(nativeElement) && nativeElement.children[0]) {
@@ -36,13 +39,15 @@ export class StacheAffixTopDirective implements AfterViewInit {
 
   @HostListener('window:scroll')
   public onWindowScroll(): void {
-    const omnibarHeight = this.omnibarService.getHeight();
+    this.omnibarHeight = this.omnibarService.getHeight();
+    this.setMaxHeight();
 
     if (!this.isAffixed) {
-      this.offsetTop = this.element.offsetTop;
+      this.offsetTop = this.getOffset();
     }
 
-    const windowIsScrolledBeyondElement = false;
+    const windowIsScrolledBeyondElement =
+      ((this.offsetTop - this.omnibarHeight) <= this.windowRef.nativeWindow.scrollY);
 
     if (windowIsScrolledBeyondElement) {
       this.affixToTop();
@@ -64,6 +69,18 @@ export class StacheAffixTopDirective implements AfterViewInit {
     return isComponent;
   }
 
+  private getOffset() {
+    let offset = this.element.offsetTop;
+    let el = this.element;
+
+    while (el.offsetParent) {
+      offset += el.offsetParent.offsetTop;
+      el = el.offsetParent
+    }
+
+    return offset;
+  }
+
   private affixToTop(): void {
     if (!this.isAffixed) {
       this.isAffixed = true;
@@ -77,8 +94,25 @@ export class StacheAffixTopDirective implements AfterViewInit {
     if (this.isAffixed) {
       this.isAffixed = false;
       this.renderer.setStyle(this.element, 'position', 'initial');
-      this.renderer.setStyle(this.element, 'top', `${this.offsetTop}px`);
       this.renderer.removeClass(this.element, StacheAffixTopDirective.AFFIX_CLASS_NAME);
     }
+  }
+
+  private setMaxHeight() {
+    let maxHeight = `calc(100% - ${this.omnibarHeight}px)`;
+
+    if (this.footerIsVisible()) {
+      maxHeight = `${this.footerWrapper.offsetTop - this.windowRef.nativeWindow.pageYOffset - this.omnibarHeight}px`;
+    }
+
+    this.renderer.setStyle(this.element, 'height', `${maxHeight}`);
+  }
+
+  private  footerIsVisible(): boolean {
+    if (this.footerWrapper) {
+      return (this.footerWrapper.getBoundingClientRect().top <= (this.windowRef.nativeWindow.innerHeight));
+    }
+
+    return false;
   }
 }

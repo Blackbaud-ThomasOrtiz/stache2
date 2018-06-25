@@ -6,7 +6,6 @@ import { expect } from '@blackbaud/skyux-lib-testing';
 
 import { StacheSidebarWrapperComponent } from './sidebar-wrapper.component';
 import { StacheSidebarComponent } from './sidebar.component';
-import { StacheAffixWithinLayoutDirective } from './affix-within-layout.directive';
 import { StacheNavComponent, StacheNavService } from '../nav';
 
 import { Subject } from 'rxjs';
@@ -104,7 +103,6 @@ describe('StacheSidebarWrapperComponent', () => {
       ],
       providers: [
         StacheNavService,
-        StacheAffixWithinLayoutDirective,
         { provide: StacheWindowRef, useValue: mockWindowRef },
         { provide: StacheOmnibarAdapterService, useValue: mockOmnibarService },
         { provide: StacheRouteService, useValue: mockRouteService },

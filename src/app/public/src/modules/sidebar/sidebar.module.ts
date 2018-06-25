@@ -5,13 +5,11 @@ import { StacheNavModule } from '../nav';
 import { StacheSidebarComponent } from './sidebar.component';
 import { StacheSidebarWrapperComponent } from './sidebar-wrapper.component';
 import { StacheLinkModule } from '../link';
-import { StacheAffixWithinLayoutDirective } from './affix-within-layout.directive';
 
 @NgModule({
   declarations: [
     StacheSidebarComponent,
-    StacheSidebarWrapperComponent,
-    StacheAffixWithinLayoutDirective
+    StacheSidebarWrapperComponent
   ],
   imports: [
     CommonModule,
@@ -20,8 +18,7 @@ import { StacheAffixWithinLayoutDirective } from './affix-within-layout.directiv
   ],
   exports: [
     StacheSidebarComponent,
-    StacheSidebarWrapperComponent,
-    StacheAffixWithinLayoutDirective
+    StacheSidebarWrapperComponent
   ]
 })
 export class StacheSidebarModule { }
