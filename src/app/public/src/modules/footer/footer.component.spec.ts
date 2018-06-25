@@ -3,7 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { expect } from '@blackbaud/skyux-lib-testing';
 
 import { StacheFooterComponent } from './footer.component';
-import { StacheContainerModule } from '../container';
 import { StacheNavModule } from '../nav';
 import { StacheConfigService, StacheWindowRef, StacheRouteService } from '../shared';
 
@@ -49,8 +48,7 @@ describe('StacheFooterComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        StacheNavModule,
-        StacheContainerModule
+        StacheNavModule
       ],
       declarations: [
         StacheFooterComponent

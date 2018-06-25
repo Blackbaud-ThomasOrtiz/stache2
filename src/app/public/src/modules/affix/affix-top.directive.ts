@@ -42,9 +42,9 @@ export class StacheAffixTopDirective implements AfterViewInit {
       this.offsetTop = this.element.offsetTop;
     }
 
-    const windowIsScrolledBeyondElement =
-      ((this.offsetTop - omnibarHeight) <= this.windowRef.nativeWindow.scrollY);
+    const windowIsScrolledBeyondElement = false;
 
+      console.log(this.element.getBoundingClientRect(),'<- ->', this.windowRef.nativeWindow.pageYOffset);
     if (windowIsScrolledBeyondElement) {
       this.affixToTop();
     } else {

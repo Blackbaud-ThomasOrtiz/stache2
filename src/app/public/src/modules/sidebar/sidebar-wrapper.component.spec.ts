@@ -6,6 +6,7 @@ import { expect } from '@blackbaud/skyux-lib-testing';
 
 import { StacheSidebarWrapperComponent } from './sidebar-wrapper.component';
 import { StacheSidebarComponent } from './sidebar.component';
+import { StacheAffixWithinLayoutDirective } from './affix-within-layout.directive';
 import { StacheNavComponent, StacheNavService } from '../nav';
 
 import { Subject } from 'rxjs';
@@ -20,7 +21,7 @@ import {
 import { RouterLinkStubDirective } from './fixtures/router-link-stub.directive';
 import { StacheLinkModule } from '../link';
 
-fdescribe('StacheSidebarWrapperComponent', () => {
+describe('StacheSidebarWrapperComponent', () => {
   const CONTAINER_SIDEBAR_CLASSNAME = 'stache-container-sidebar';
   let component: StacheSidebarWrapperComponent;
   let fixture: ComponentFixture<StacheSidebarWrapperComponent>;
@@ -103,6 +104,7 @@ fdescribe('StacheSidebarWrapperComponent', () => {
       ],
       providers: [
         StacheNavService,
+        StacheAffixWithinLayoutDirective,
         { provide: StacheWindowRef, useValue: mockWindowRef },
         { provide: StacheOmnibarAdapterService, useValue: mockOmnibarService },
         { provide: StacheRouteService, useValue: mockRouteService },
@@ -118,17 +120,6 @@ fdescribe('StacheSidebarWrapperComponent', () => {
 
   it('should render the component', () => {
     expect(fixture).toExist();
-  });
-
-  it('should set the top value for the wrapper based on the omnibar height', () => {
-    component.ngOnInit();
-    let el = fixture.debugElement.query(By.css('.stache-sidebar-wrapper')).nativeElement;
-    expect(el.style.top).toEqual(`${omnibarHeight}px`);
-
-    omnibarHeight = 0;
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(el.style.top).toEqual(`0px`);
   });
 
   it('should open and close the sidebar', () => {

@@ -37,7 +37,7 @@ export class StacheAffixWithinLayoutDirective implements AfterViewInit {
     if ((this.layoutWrapper.offsetTop - this.omnibarHeight) <= windowHeight) {
       this.affixSidebar();
     } else {
-      this.resetSidebar()
+      this.resetSidebar();
     }
   }
 

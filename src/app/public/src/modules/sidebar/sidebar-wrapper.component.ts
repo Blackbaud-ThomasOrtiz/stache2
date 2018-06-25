@@ -50,6 +50,12 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
     this.updateAriaLabel();
   }
 
+  public ngOnDestroy(): void {
+    this.removeClassFromContainers();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   private checkWindowWidth(): void {
     let windowWidth = this.windowRef.nativeWindow.innerWidth;
 
@@ -78,11 +84,5 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
         this.renderer.removeClass(container, CONTAINER_SIDEBAR_CLASSNAME);
       });
     }
-  }
-
-  public ngOnDestroy(): void {
-    this.removeClassFromContainers();
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
 }

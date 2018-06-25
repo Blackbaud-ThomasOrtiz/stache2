@@ -9,6 +9,7 @@ import { expect } from '@blackbaud/skyux-builder/runtime/testing/browser';
 
 import { StacheWrapperTestComponent } from './fixtures/wrapper.component.fixture';
 import { StacheWrapperComponent } from './wrapper.component';
+import { StacheFooterModule } from '../footer';
 import { StacheTitleService } from './title.service';
 
 import { StacheNavService, StacheNavLink } from '../nav';
@@ -72,6 +73,16 @@ describe('StacheWrapperComponent', () => {
     public runtime: any = {
       routes: []
     };
+    public stache: any = {
+      footer: {
+        nav: [
+          {
+            title: 'Some Title',
+            text: 'Some text'
+          }
+        ]
+      }
+    };
   }
 
   class MockJsonDataService {
@@ -119,7 +130,12 @@ describe('StacheWrapperComponent', () => {
               add(cssClass: string) { }
             },
             scrollIntoView() { },
-            offsetHeight: 50
+            offsetHeight: 50,
+            getBoundingClientRect() {
+              return {
+                top: 100
+              };
+            }
           };
         }),
         querySelectorAll: jasmine.createSpy('querySelectorAll').and.callFake((selector: string): any[] => {
@@ -166,7 +182,8 @@ describe('StacheWrapperComponent', () => {
       imports: [
         RouterTestingModule,
         StachePageAnchorModule,
-        StacheLayoutModule
+        StacheLayoutModule,
+        StacheFooterModule
       ],
       declarations: [
         StacheWrapperComponent,
@@ -189,6 +206,7 @@ describe('StacheWrapperComponent', () => {
 
     fixture = TestBed.createComponent(StacheWrapperComponent);
     component = fixture.componentInstance;
+    component.showFooter = false;
   });
 
   it('should render the component', () => {
