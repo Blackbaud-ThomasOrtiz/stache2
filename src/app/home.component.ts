@@ -189,7 +189,7 @@ export class HomeComponent {
           path: '/8'
         },
         {
-          name: 'Sidebar Link',
+          name: 'Last Item Link',
           path: '/9'
         }
       ]

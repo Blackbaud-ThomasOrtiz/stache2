@@ -14,6 +14,7 @@ import { StacheWindowRef, StacheOmnibarAdapterService } from '../shared';
 export class StacheAffixTopDirective implements AfterViewInit {
   public static readonly AFFIX_CLASS_NAME: string = 'stache-affix-top';
   public isAffixed = false;
+  public nativeWidth: number;
 
   private offsetTop: number = 0;
   private element: any;
@@ -26,7 +27,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     const nativeElement = this.elementRef.nativeElement;
-
+    this.nativeWidth = nativeElement.offsetWidth;
     if (this.isComponent(nativeElement) && nativeElement.children[0]) {
       this.element = nativeElement.children[0];
     } else {
@@ -43,7 +44,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
     }
 
     const windowIsScrolledBeyondElement =
-      ((this.offsetTop - omnibarHeight) <= this.windowRef.nativeWindow.scrollY);
+      ((this.offsetTop - omnibarHeight) <= this.windowRef.nativeWindow.pageYOffset);
 
     if (windowIsScrolledBeyondElement) {
       this.affixToTop();
@@ -70,6 +71,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
       this.isAffixed = true;
       this.renderer.setStyle(this.element, 'position', 'fixed');
       this.renderer.setStyle(this.element, 'top', '0px');
+      this.renderer.setStyle(this.element, 'width', `${this.nativeWidth}px`);
       this.renderer.addClass(this.element, StacheAffixTopDirective.AFFIX_CLASS_NAME);
     }
   }
