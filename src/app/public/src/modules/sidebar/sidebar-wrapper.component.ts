@@ -72,7 +72,7 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   private addClassToContainers(): void {
     if (this.stacheContainers && this.stacheContainers.length) {
-      this.stacheContainers.forEach((container: HTMLElement) => {
+      Array.prototype.forEach.call(this.stacheContainers, (container: HTMLElement) => {
         this.renderer.addClass(container, CONTAINER_SIDEBAR_CLASSNAME);
       });
     }
@@ -80,7 +80,7 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   private removeClassFromContainers(): void {
     if (this.stacheContainers && this.stacheContainers.length) {
-      this.stacheContainers.forEach((container: HTMLElement) => {
+      Array.prototype.forEach.call(this.stacheContainers, (container: HTMLElement) => {
         this.renderer.removeClass(container, CONTAINER_SIDEBAR_CLASSNAME);
       });
     }
