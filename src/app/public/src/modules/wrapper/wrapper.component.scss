@@ -48,3 +48,11 @@
     text-align: right;
   }
 }
+
+// TODO: Remove this line once auth client gets updated:
+// https://github.com/blackbaud/auth-client/issues/70
+::ng-deep {
+  .sky-omnibar-iframe-session-watcher {
+    position: absolute;
+  }
+}

@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.stache-layout-footer {
+  background-color: $stache-background-color-neutral-light;
+  padding: $stache-padding-plus-half 0;
+  position: relative;
+}
+
+.stache-layout-footer-heading {
+  margin: $stache-margin 0;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.stache-layout-footer-copyright-label {
+  color: $stache-text-color-deemphasized;
+  font-size: 85%;
+}

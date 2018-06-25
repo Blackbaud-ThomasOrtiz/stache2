@@ -25,6 +25,7 @@ import {
 import { StacheLayoutModule } from '../layout';
 import { StachePageAnchorModule } from '../page-anchor';
 import { StachePageAnchorService } from '../page-anchor/page-anchor.service';
+import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
 
 describe('StacheWrapperComponent', () => {
   let component: StacheWrapperComponent;
@@ -38,6 +39,7 @@ describe('StacheWrapperComponent', () => {
   let mockAnchorService: any;
   let mockOmnibarService: any;
   let mockTextContent: string = '';
+  let mockSkyAppResourcesService: any;
 
   class MockActivatedRoute {
     public fragment: Observable<string> = Observable.of('test-route');
@@ -151,6 +153,23 @@ describe('StacheWrapperComponent', () => {
     }
   }
 
+  class MockSkyAppResourcesService {
+    public getString(): any {
+      return {
+        subscribe: (cb: any) => {
+          cb();
+        },
+        take: () => {
+          return {
+            subscribe: (cb: any) => {
+              cb();
+            }
+          };
+        }
+      };
+    }
+  }
+
   beforeEach(() => {
     mockActivatedRoute = new MockActivatedRoute();
     mockNavService = new MockNavService();
@@ -160,6 +179,7 @@ describe('StacheWrapperComponent', () => {
     mockWindowService = new MockWindowService({});
     mockAnchorService = new MockAnchorService();
     mockOmnibarService = new MockOmbibarService();
+    mockSkyAppResourcesService = new MockSkyAppResourcesService();
 
     TestBed.configureTestingModule({
       imports: [
@@ -181,6 +201,7 @@ describe('StacheWrapperComponent', () => {
         { provide: StacheWindowRef, useValue: mockWindowService },
         { provide: StacheConfigService, useValue: mockConfigService },
         { provide: StachePageAnchorService, useValue: mockAnchorService },
+        { provide: SkyAppResourcesService, useValue: mockSkyAppResourcesService },
         STACHE_ROUTE_METADATA_PROVIDERS
       ]
     })

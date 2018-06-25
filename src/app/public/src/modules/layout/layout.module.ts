@@ -19,6 +19,7 @@ import { StacheLayoutComponent } from './layout.component';
 import { StacheLayoutBlankComponent } from './layout-blank.component';
 import { StacheLayoutContainerComponent } from './layout-container.component';
 import { StacheLayoutSidebarComponent } from './layout-sidebar.component';
+import { StacheLayoutFooterComponent } from './layout-footer.component';
 
 @NgModule({
   imports: [
@@ -38,9 +39,10 @@ import { StacheLayoutSidebarComponent } from './layout-sidebar.component';
   ],
   declarations: [
     StacheContainerComponent,
-    StacheLayoutComponent,
     StacheLayoutBlankComponent,
+    StacheLayoutComponent,
     StacheLayoutContainerComponent,
+    StacheLayoutFooterComponent,
     StacheLayoutSidebarComponent
   ],
   exports: [

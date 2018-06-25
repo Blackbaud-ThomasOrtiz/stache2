@@ -35,6 +35,20 @@
         "url": "https://github.com/blackbaud/stache2",
         "text": "Suggest Edits"
       },
+      "footer": {
+        "nav": {
+          "items": [
+            {
+              "title": "Home",
+              "route": "/"
+            },
+            {
+              "title": "Demos",
+              "route": "/demos"
+            }
+          ]
+        }
+      },
       "searchConfig": {
       },
       "googleAnalytics": {

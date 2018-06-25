@@ -1,14 +1,29 @@
-<stache-sidebar-wrapper [sidebarRoutes]="sidebarRoutes">
-</stache-sidebar-wrapper>
+<stache-layout-blank
+  identifier="sidebar"
+  [ngClass]="{
+    'stache-layout-sidebar-closed': !isOpen,
+    'stache-layout-sidebar-open': isOpen
+  }"
+>
+  <aside class="stache-layout-sidebar-aside">
+    <stache-affix>
+      <stache-sidebar-wrapper
+        [sidebarRoutes]="sidebarRoutes"
+        (toggle)="onToggle($event)"
+      >
+      </stache-sidebar-wrapper>
+    </stache-affix>
+  </aside>
 
-<stache-layout-blank identifier="sidebar">
-  <stache-container>
+  <div class="stache-layout-sidebar-main">
+    <stache-container>
 
-    <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
-    </stache-breadcrumbs>
+      <stache-breadcrumbs *ngIf="showBreadcrumbs" [routes]="breadcrumbsRoutes">
+      </stache-breadcrumbs>
 
-    <stache-edit-button *ngIf="showEditButton">
-    </stache-edit-button>
+      <stache-edit-button *ngIf="showEditButton">
+      </stache-edit-button>
+
       <stache-page-header *ngIf="pageTitle">
         <stache-page-title>
           {{pageTitle}}
@@ -22,7 +37,11 @@
       </stache-table-of-contents>
 
       <ng-content></ng-content>
-  </stache-container>
+    </stache-container>
+
+    <stache-layout-footer>
+    </stache-layout-footer>
+  </div>
 </stache-layout-blank>
 
 <stache-back-to-top *ngIf="showBackToTop">

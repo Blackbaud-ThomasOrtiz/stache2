@@ -1,85 +1,65 @@
-import { Component, Input, OnInit, Renderer2, OnDestroy, ElementRef, AfterViewInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { StacheNavLink } from '../nav';
-import { StacheOmnibarAdapterService, StacheWindowRef } from '../shared';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  EventEmitter,
+  Output
+} from '@angular/core';
 
-const WINDOW_SIZE_MID: number = 992;
-const CONTAINER_SIDEBAR_CLASSNAME: string  = 'stache-container-sidebar';
+import {
+  SkyMediaQueryService,
+  SkyMediaBreakpoints
+} from '@blackbaud/skyux/dist/core';
+
+import {
+  Subscription
+} from 'rxjs/Subscription';
+
+import {
+  StacheNavLink
+} from '../nav';
+
+let nextUniqueId = 0;
 
 @Component({
   selector: 'stache-sidebar-wrapper',
   templateUrl: './sidebar-wrapper.component.html',
   styleUrls: ['./sidebar-wrapper.component.scss']
 })
-export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
+export class StacheSidebarWrapperComponent implements OnInit, OnDestroy {
   @Input()
   public sidebarRoutes: StacheNavLink[];
 
-  public sidebarOpen: boolean = false;
+  @Output()
+  public toggle = new EventEmitter<any>();
 
-  public sidebarLabel: string = 'Click to open sidebar';
+  public elementId = 'stache-sidebar-content-panel-' + nextUniqueId++;
+  public isOpen = true;
 
-  private ngUnsubscribe: Subject<any> = new Subject();
-
-  private stacheContainer: HTMLElement;
+  private mediaQuerySubscription: Subscription;
 
   constructor(
-    private renderer: Renderer2,
-    private elementRef: ElementRef,
-    private omnibarService: StacheOmnibarAdapterService,
-    private windowRef: StacheWindowRef
-  ) {
-    this.windowRef.onResize$
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe(() => {
-        this.checkWindowWidth();
-        this.updateAriaLabel();
+    private mediaQueryService: SkyMediaQueryService
+  ) { }
+
+  public ngOnInit(): void {
+    this.mediaQuerySubscription = this.mediaQueryService
+      .subscribe((args: SkyMediaBreakpoints) => {
+        this.isOpen = (args === SkyMediaBreakpoints.xs);
+        this.toggleSidebar();
       });
   }
 
-  public ngOnInit(): void {
-    this.setTopAffix();
-    this.checkWindowWidth();
-    this.updateAriaLabel();
-  }
-
-  public ngAfterViewInit(): void {
-    this.stacheContainer = this.windowRef.nativeWindow.document.querySelector('.stache-container');
-    if (this.stacheContainer) {
-      this.renderer.addClass(this.stacheContainer, CONTAINER_SIDEBAR_CLASSNAME);
-    }
-  }
-
-  public setTopAffix(): void {
-    let omnibarHeight = this.omnibarService.getHeight();
-    let wrapperElement = this.elementRef.nativeElement.querySelector('.stache-sidebar-wrapper');
-    this.renderer.setStyle(wrapperElement, 'top', `${omnibarHeight}px`);
-  }
-
   public ngOnDestroy(): void {
-    if (this.stacheContainer) {
-      this.renderer.removeClass(this.stacheContainer, CONTAINER_SIDEBAR_CLASSNAME);
-    }
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.toggle.complete();
+    this.mediaQuerySubscription.unsubscribe();
   }
 
   public toggleSidebar(): void {
-    this.sidebarOpen = !this.sidebarOpen;
-    this.updateAriaLabel();
-  }
-
-  public updateAriaLabel(): void {
-    this.sidebarLabel = this.sidebarOpen ? 'Click to close sidebar' : 'Click to open sidebar';
-  }
-
-  private checkWindowWidth(): void {
-    let windowWidth = this.windowRef.nativeWindow.innerWidth;
-
-    if (windowWidth <= WINDOW_SIZE_MID) {
-      this.sidebarOpen = false;
-    } else {
-      this.sidebarOpen = true;
-    }
+    this.isOpen = !this.isOpen;
+    this.toggle.emit({
+      state: this.isOpen
+    });
   }
 }
