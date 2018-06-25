@@ -38,7 +38,7 @@ export class StacheLayoutSidebarComponent implements StacheLayout {
   @InputConverter()
   public showTableOfContents: boolean;
 
-  public isOpen = true;
+  public isOpen = false;
 
   public onToggle(result: any): void {
     this.isOpen = result.state;

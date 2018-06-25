@@ -20,13 +20,18 @@ stache-layout-blank {
 .stache-layout-sidebar-aside {
   flex: 0 0 $stache-sidebar-column-width;
   z-index: $stache-sidebar-z-index;
-  border-right: 1px solid $stache-border-color-neutral-medium;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.25);
 
   ::ng-deep {
     stache-sidebar-wrapper {
       max-height: calc(100vh - #{$stache-omnibar-height});
       overflow-y: visible;
+    }
+
+    .stache-sidebar-buttons {
+      @media (min-width: $stache-screen-sm-min) {
+        display: none;
+      }
     }
   }
 }
@@ -36,6 +41,7 @@ stache-layout-blank {
   padding-top: $stache-padding * 2;
   display: flex;
   flex-direction: column;
+  width: calc(100% - #{$stache-sidebar-column-width});
 
   ::ng-deep {
     stache-container {
@@ -45,17 +51,19 @@ stache-layout-blank {
 }
 
 .stache-layout-sidebar-closed {
-  margin-left: -$stache-sidebar-column-width;
+  @media (max-width: $stache-screen-xs-max) {
+    margin-left: -$stache-sidebar-column-width;
 
-  ::ng-deep {
-    .stache-sidebar-buttons {
-      position: absolute;
-      left: 100%;
+    ::ng-deep {
+      .stache-sidebar-buttons {
+        position: absolute;
+        left: 100%;
+      }
     }
-  }
 
-  .stache-layout-sidebar-aside {
-    border-right: none;
-    box-shadow: none;
+    .stache-layout-sidebar-aside {
+      border-right: none;
+      box-shadow: none;
+    }
   }
 }
