@@ -121,35 +121,19 @@ describe('StacheSidebarWrapperComponent', () => {
   });
 
   it('should open and close the sidebar', () => {
-    expect(component.sidebarOpen).toEqual(false);
+    expect(component.isOpen).toEqual(false);
     component.toggleSidebar();
-    expect(component.sidebarOpen).toEqual(true);
+    expect(component.isOpen).toEqual(true);
     component.toggleSidebar();
-    expect(component.sidebarOpen).toEqual(false);
-  });
-
-  it('should close the sidebar when the window size is below the WINDOW_SIZE_MID', () => {
-    component.sidebarOpen = true;
-    mockWindowRef.nativeWindow.innerWidth = 10;
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(component.sidebarOpen).toBe(false);
-  });
-
-  it('should open the sidebar when the window size is above the WINDOW_SIZE_MID', () => {
-    component.sidebarOpen = false;
-    mockWindowRef.nativeWindow.innerWidth = 1000;
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(component.sidebarOpen).toBe(true);
+    expect(component.isOpen).toEqual(false);
   });
 
   it('should call the check the window width on window resize', () => {
-    component.sidebarOpen = false;
+    component.isOpen = false;
     mockWindowRef.nativeWindow.innerWidth = 10;
     mockWindowRef.onResize$.next();
     fixture.detectChanges();
-    expect(component.sidebarOpen).toBe(false);
+    expect(component.isOpen).toBe(false);
   });
 
   it('should be accessible', async(() => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 
 import { StacheLayout } from './layout';
 import { StacheNavLink } from '../nav';
@@ -9,7 +9,7 @@ import { StacheWindowRef } from '../shared';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class StacheLayoutComponent implements OnInit, StacheLayout {
+export class StacheLayoutComponent implements OnInit, StacheLayout, AfterViewInit {
   @Input()
   public pageTitle: string;
 

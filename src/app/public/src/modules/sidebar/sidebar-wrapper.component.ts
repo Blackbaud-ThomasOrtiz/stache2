@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, Input, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { SkyMediaQueryService, SkyMediaBreakpoints } from '@blackbaud/skyux/dist/core';
 

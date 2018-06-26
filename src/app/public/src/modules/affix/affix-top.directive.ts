@@ -75,7 +75,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
 
     while (el.offsetParent) {
       offset += el.offsetParent.offsetTop;
-      el = el.offsetParent
+      el = el.offsetParent;
     }
 
     return offset;
