@@ -93,7 +93,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
   private resetElement(): void {
     if (this.isAffixed) {
       this.isAffixed = false;
-      this.renderer.setStyle(this.element, 'position', 'initial');
+      this.renderer.setStyle(this.element, 'position', 'static');
       this.renderer.removeClass(this.element, StacheAffixTopDirective.AFFIX_CLASS_NAME);
     }
   }
