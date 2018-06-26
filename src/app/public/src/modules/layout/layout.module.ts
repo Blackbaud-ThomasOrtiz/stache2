@@ -13,13 +13,13 @@ import { StacheGridModule } from '../grid';
 import { StachePageHeaderModule } from '../page-header';
 import { StachePageAnchorModule } from '../page-anchor';
 import { StachePageSummaryModule } from '../page-summary';
-import { StacheFooterModule } from '../footer';
 
 import { StacheContainerComponent } from './container.component';
 import { StacheLayoutComponent } from './layout.component';
 import { StacheLayoutBlankComponent } from './layout-blank.component';
 import { StacheLayoutContainerComponent } from './layout-container.component';
 import { StacheLayoutSidebarComponent } from './layout-sidebar.component';
+import { StacheFooterComponent } from './footer.component';
 
 @NgModule({
   imports: [
@@ -35,18 +35,21 @@ import { StacheLayoutSidebarComponent } from './layout-sidebar.component';
     StacheTableOfContentsModule,
     StachePageSummaryModule,
     StachePageHeaderModule,
-    StachePageAnchorModule,
-    StacheFooterModule
+    StachePageAnchorModule
   ],
   declarations: [
     StacheLayoutComponent,
     StacheLayoutBlankComponent,
     StacheLayoutContainerComponent,
     StacheLayoutSidebarComponent,
+    StacheFooterComponent,
     StacheContainerComponent
+
   ],
   exports: [
-    StacheLayoutComponent
+    StacheLayoutComponent,
+    StacheFooterComponent,
+    StacheContainerComponent
   ],
   providers: []
 })

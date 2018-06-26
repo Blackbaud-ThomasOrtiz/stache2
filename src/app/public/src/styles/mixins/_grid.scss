@@ -1,4 +1,4 @@
-@import '../_variables';
+@import '../variables';
 
 @mixin create_columns($screen-size: sm) {
   @for $i from 1 through $stache-grid-columns {

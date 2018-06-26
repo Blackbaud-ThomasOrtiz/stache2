@@ -1,4 +1,4 @@
-@import '../../styles/_variables';
+@import '../../styles/variables';
 
 ::ng-deep
 .stache-wrapper {
@@ -49,16 +49,17 @@
   }
 }
 
-::ng-deep
-.sky-omnibar-iframe-session-watcher {
-  display: none;
+// TODO: Remove this line once auth client gets updated:
+// https://github.com/blackbaud/auth-client/issues/70
+::ng-deep {
+  .sky-omnibar-iframe-session-watcher {
+    position: absolute;
+  }
 }
 
 ::ng-deep
 .stache-omnibar-enabled {
   .stache-affix-top {
-    @media (min-width: $stache-screen-sm-min) {
-      margin-top: $stache-omnibar-height;
-    }
+    margin-top: $stache-omnibar-height;
   }
 }

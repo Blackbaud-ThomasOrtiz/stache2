@@ -1,0 +1,17 @@
+@import '../../styles/variables';
+
+.stache-footer-wrapper {
+  background-color: $stache-background-color-neutral-light;
+  padding: $stache-padding $stache-container-mobile-padding;
+}
+
+.stache-footer-heading {
+  margin: $stache-margin 0;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.stache-footer-copyright-label {
+  color: $stache-text-color-deemphasized;
+  font-size: 85%;
+}

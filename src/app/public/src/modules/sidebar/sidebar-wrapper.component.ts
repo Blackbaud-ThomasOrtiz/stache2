@@ -1,10 +1,14 @@
 import { Component, Input, OnInit, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
+
 import { StacheNavLink } from '../nav';
 import { StacheWindowRef } from '../shared';
+import { SkyMediaQueryService, SkyMediaBreakpoints } from '@blackbaud/skyux/dist/core';
 
 const WINDOW_SIZE_MID: number = 992;
 const CONTAINER_SIDEBAR_CLASSNAME: string  = 'stache-container-sidebar';
+let nextUniqueId = 0;
 
 @Component({
   selector: 'stache-sidebar-wrapper',
@@ -15,18 +19,29 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
   @Input()
   public sidebarRoutes: StacheNavLink[];
 
-  public sidebarOpen: boolean = false;
+  public isOpen: boolean = false;
 
   public sidebarLabel: string = 'Click to open sidebar';
 
   private ngUnsubscribe: Subject<any> = new Subject();
+  public elementId = 'stache-sidebar-content-panel-' + nextUniqueId++;
 
   private stacheContainers: HTMLElement[];
 
+  private mediaQuerySubscription: Subscription;
+
   constructor(
     private renderer: Renderer2,
-    private windowRef: StacheWindowRef
+    private windowRef: StacheWindowRef,
+    private mediaQueryService: SkyMediaQueryService
   ) {
+
+    this.mediaQuerySubscription = this.mediaQueryService
+     .subscribe((args: SkyMediaBreakpoints) => {
+       this.isOpen = (args === SkyMediaBreakpoints.xs);
+       this.toggleSidebar();
+     });
+
     this.windowRef.onResize$
       .takeUntil(this.ngUnsubscribe)
       .subscribe(() => {
@@ -46,7 +61,7 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
   }
 
   public toggleSidebar(): void {
-    this.sidebarOpen = !this.sidebarOpen;
+    this.isOpen = !this.isOpen;
     this.updateAriaLabel();
   }
 
@@ -54,20 +69,21 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
     this.removeClassFromContainers();
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+    this.mediaQuerySubscription.unsubscribe();
   }
 
   private checkWindowWidth(): void {
     let windowWidth = this.windowRef.nativeWindow.innerWidth;
 
     if (windowWidth <= WINDOW_SIZE_MID) {
-      this.sidebarOpen = false;
+      this.isOpen = false;
     } else {
-      this.sidebarOpen = true;
+      this.isOpen = true;
     }
   }
 
   private updateAriaLabel(): void {
-    this.sidebarLabel = this.sidebarOpen ? 'Click to close sidebar' : 'Click to open sidebar';
+    this.sidebarLabel = this.isOpen ? 'Click to close sidebar' : 'Click to open sidebar';
   }
 
   private addClassToContainers(): void {

@@ -30,7 +30,6 @@ export class StacheOmnibarAdapterService {
 
   public omnibarEnabled(): boolean {
     // Converts the element's existence to a boolean.
-    console.log('????');
     return !!this.element;
   }
 
