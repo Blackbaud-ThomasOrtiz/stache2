@@ -1,12 +1,10 @@
 import { Component, Input, OnInit, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
+import { SkyMediaQueryService, SkyMediaBreakpoints } from '@blackbaud/skyux/dist/core';
 
 import { StacheNavLink } from '../nav';
 import { StacheWindowRef } from '../shared';
-import { SkyMediaQueryService, SkyMediaBreakpoints } from '@blackbaud/skyux/dist/core';
 
-const WINDOW_SIZE_MID: number = 992;
 const CONTAINER_SIDEBAR_CLASSNAME: string  = 'stache-container-sidebar';
 let nextUniqueId = 0;
 
@@ -15,7 +13,7 @@ let nextUniqueId = 0;
   templateUrl: './sidebar-wrapper.component.html',
   styleUrls: ['./sidebar-wrapper.component.scss']
 })
-export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterViewInit {
+export class StacheSidebarWrapperComponent implements  OnDestroy, AfterViewInit {
   @Input()
   public sidebarRoutes: StacheNavLink[];
 
@@ -23,8 +21,7 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   public sidebarLabel: string = 'Click to open sidebar';
 
-  private ngUnsubscribe: Subject<any> = new Subject();
-  public elementId = 'stache-sidebar-content-panel-' + nextUniqueId++;
+  public elementId = `stache-sidebar-content-panel-${(nextUniqueId++)}`;
 
   private stacheContainers: HTMLElement[];
 
@@ -38,21 +35,9 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
     this.mediaQuerySubscription = this.mediaQueryService
      .subscribe((args: SkyMediaBreakpoints) => {
-       this.isOpen = (args === SkyMediaBreakpoints.xs);
+       this.isOpen = (args <= SkyMediaBreakpoints.sm);
        this.toggleSidebar();
      });
-
-    this.windowRef.onResize$
-      .takeUntil(this.ngUnsubscribe)
-      .subscribe(() => {
-        this.checkWindowWidth();
-        this.updateAriaLabel();
-      });
-  }
-
-  public ngOnInit(): void {
-    this.checkWindowWidth();
-    this.updateAriaLabel();
   }
 
   public ngAfterViewInit(): void {
@@ -62,28 +47,11 @@ export class StacheSidebarWrapperComponent implements OnInit, OnDestroy, AfterVi
 
   public toggleSidebar(): void {
     this.isOpen = !this.isOpen;
-    this.updateAriaLabel();
   }
 
   public ngOnDestroy(): void {
     this.removeClassFromContainers();
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
     this.mediaQuerySubscription.unsubscribe();
-  }
-
-  private checkWindowWidth(): void {
-    let windowWidth = this.windowRef.nativeWindow.innerWidth;
-
-    if (windowWidth <= WINDOW_SIZE_MID) {
-      this.isOpen = false;
-    } else {
-      this.isOpen = true;
-    }
-  }
-
-  private updateAriaLabel(): void {
-    this.sidebarLabel = this.isOpen ? 'Click to close sidebar' : 'Click to open sidebar';
   }
 
   private addClassToContainers(): void {
