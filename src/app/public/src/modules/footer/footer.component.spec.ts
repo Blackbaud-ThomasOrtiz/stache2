@@ -23,7 +23,7 @@ describe('StacheFooterComponent', () => {
         route: '/demos/anchor-link'
       }
     ],
-    copyright: 'test copyright'
+    copyrightLabel: 'test copyright'
   };
 
   class MockConfigService {
@@ -72,7 +72,7 @@ describe('StacheFooterComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
     expect(component.footerLinks).toExist();
-    expect(component.copyright).toBe(footerConfig.copyright);
+    expect(component.copyrightLabel).toBe(footerConfig.copyrightLabel);
     expect(component.siteName).toBe(mockConfigService.skyux.name);
   });
 
@@ -99,8 +99,8 @@ describe('StacheFooterComponent', () => {
     expect(component.footerLinks).not.toEqual(footerConfig.nav);
     expect(component.footerLinks).toEqual([]);
 
-    expect(component.copyright).not.toEqual(footerConfig.copyright);
-    expect(component.copyright).toEqual('Blackbaud, Inc. All rights reserved.');
+    expect(component.copyrightLabel).not.toEqual(footerConfig.copyrightLabel);
+    expect(component.copyrightLabel).toEqual('Blackbaud, Inc. All rights reserved.');
 
     expect(component.siteName).toBe(undefined);
   });

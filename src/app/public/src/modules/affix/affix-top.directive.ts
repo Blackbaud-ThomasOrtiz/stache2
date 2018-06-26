@@ -43,7 +43,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
     this.setMaxHeight();
 
     if (!this.isAffixed) {
-      this.offsetTop = this.getOffset();
+      this.offsetTop = this.getOffset(this.element);
     }
 
     const windowIsScrolledBeyondElement =
@@ -69,9 +69,9 @@ export class StacheAffixTopDirective implements AfterViewInit {
     return isComponent;
   }
 
-  private getOffset() {
-    let offset = this.element.offsetTop;
-    let el = this.element;
+  private getOffset(element: any) {
+    let offset = element.offsetTop;
+    let el = element;
 
     while (el.offsetParent) {
       offset += el.offsetParent.offsetTop;
@@ -85,7 +85,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
     if (!this.isAffixed) {
       this.isAffixed = true;
       this.renderer.setStyle(this.element, 'position', 'fixed');
-      // this.renderer.setStyle(this.element, 'top', '0px');
+      this.renderer.setStyle(this.element, 'top', '0px');
       this.renderer.addClass(this.element, StacheAffixTopDirective.AFFIX_CLASS_NAME);
     }
   }
@@ -102,7 +102,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
     let maxHeight = `calc(100% - ${this.omnibarHeight}px)`;
 
     if (this.footerIsVisible()) {
-      maxHeight = `${this.footerWrapper.offsetTop - this.windowRef.nativeWindow.pageYOffset - this.omnibarHeight}px`;
+      maxHeight = `${this.getOffset(this.footerWrapper) - this.windowRef.nativeWindow.pageYOffset - this.omnibarHeight}px`;
     }
 
     this.renderer.setStyle(this.element, 'height', `${maxHeight}`);
