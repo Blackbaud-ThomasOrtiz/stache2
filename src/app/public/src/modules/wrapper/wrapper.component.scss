@@ -53,3 +53,12 @@
 .sky-omnibar-iframe-session-watcher {
   display: none;
 }
+
+::ng-deep
+.stache-omnibar-enabled {
+  .stache-affix-top {
+    @media (min-width: $stache-screen-sm-min) {
+      margin-top: $stache-omnibar-height;
+    }
+  }
+}
