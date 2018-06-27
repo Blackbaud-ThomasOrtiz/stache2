@@ -9,7 +9,7 @@ import { StacheCodeComponent } from '../code';
 
 import { StacheWindowRef, StacheOmnibarAdapterService, TestUtility } from '../shared';
 
-fdescribe('AffixTopTestDirective', () => {
+describe('AffixTopTestDirective', () => {
   const className: string = StacheAffixTopDirective.AFFIX_CLASS_NAME;
   let testOmnibarHeight: number = 0;
   class MockOmnibarService {
@@ -122,23 +122,6 @@ fdescribe('AffixTopTestDirective', () => {
     })
   );
 
-  it('should set the maxHeight of the element based on footer and page height', () => {
-    const element = directiveElements[1].nativeElement.children[0];
-    const directiveInstance = directiveElements[0].injector.get(StacheAffixTopDirective);
-    directiveInstance.footerWrapper = {
-      offsetTop: 250,
-      getBoundingClientRect() {
-        console.log('bounding');
-        return {
-          top: 250
-        };
-      }
-    };
-
-    TestUtility.triggerDomEvent(windowRef, 'scroll');
-    expect(element.style.maxHeight).toEqual(50);
-  });
-
   it('should not attempt to reset the element if it already has',
     fakeAsync(() => {
       const element = directiveElements[0].nativeElement;
@@ -152,6 +135,31 @@ fdescribe('AffixTopTestDirective', () => {
 
       TestUtility.triggerDomEvent(windowRef, 'scroll');
       expect(element).not.toHaveCssClass(className);
+    })
+  );
+
+  it('should set the maxHeight of the element based on footer offset - window pageYOffset - omnibar height',
+    fakeAsync(() => {
+      const element = directiveElements[0].nativeElement;
+      const directiveInstance = directiveElements[0].injector.get(StacheAffixTopDirective);
+      fixture.detectChanges();
+      tick();
+      directiveInstance.footerWrapper = {
+        offsetParent: undefined,
+        offsetTop: 450,
+        getBoundingClientRect() {
+          return {
+            top: 0
+          };
+        }
+      } as HTMLElement;
+
+      windowRef.innerHeight = 800;
+      windowRef.pageYOffset = 350;
+      testOmnibarHeight = 50;
+
+      TestUtility.triggerDomEvent(windowRef, 'scroll');
+      expect(element.style.height).toEqual('50px');
     })
   );
 });

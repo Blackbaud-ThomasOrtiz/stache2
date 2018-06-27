@@ -15,7 +15,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
   public static readonly AFFIX_CLASS_NAME: string = 'stache-affix-top';
   public isAffixed = false;
 
-  private footerWrapper: HTMLElement;
+  private footerWrapper: any;
   private omnibarHeight: number = 0;
   private offsetTop: number = 0;
   private element: any;
@@ -103,13 +103,13 @@ export class StacheAffixTopDirective implements AfterViewInit {
 
     if (this.footerIsVisible()) {
       maxHeight = `${this.getOffset(this.footerWrapper) - this.windowRef.nativeWindow.pageYOffset - this.omnibarHeight}px`;
+      console.log(maxHeight);
     }
 
     this.renderer.setStyle(this.element, 'height', `${maxHeight}`);
   }
 
   private  footerIsVisible(): boolean {
-    console.log('is Vis?', this.footerWrapper);
     if (this.footerWrapper) {
       return (this.footerWrapper.getBoundingClientRect().top <= (this.windowRef.nativeWindow.innerHeight));
     }
