@@ -74,7 +74,7 @@ export class StacheLayoutComponent implements OnInit, StacheLayout, AfterViewIni
     this.setMinHeight();
   }
 
-  public setMinHeight() {
+  private setMinHeight() {
     let wrapper = this.elementRef.nativeElement.querySelector('.stache-layout-wrapper');
     let minHeight = this.windowRef.nativeWindow.innerHeight - wrapper.getBoundingClientRect().top;
     this.renderer.setStyle(wrapper, 'min-height', `${minHeight}px`);

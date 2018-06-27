@@ -18,9 +18,13 @@
     width: 100%;
     padding: 0 $stache-container-padding;
   }
+}
 
-  // stache-container-sidebar class is added by the sidebar-wrapper component.
-  .stache-container.stache-container-sidebar {
-    padding-left: calc( #{ $stache-sidebar-column-width } + #{ $stache-container-mobile-padding });
+::ng-deep
+.stache-sidebar-enabled {
+  @media (min-width: $stache-screen-md-min) {
+    .stache-container {
+      padding-left: calc( #{ $stache-sidebar-column-width } + #{ $stache-container-mobile-padding });
+    }
   }
 }

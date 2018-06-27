@@ -5,7 +5,7 @@ import { SkyMediaQueryService, SkyMediaBreakpoints } from '@blackbaud/skyux/dist
 import { StacheNavLink } from '../nav';
 import { StacheWindowRef } from '../shared';
 
-const CONTAINER_SIDEBAR_CLASSNAME: string  = 'stache-container-sidebar';
+const HAS_SIDEBAR_CLASS_NAME: string  = 'stache-sidebar-enabled';
 let nextUniqueId = 0;
 
 @Component({
@@ -17,7 +17,7 @@ export class StacheSidebarWrapperComponent implements  OnDestroy, AfterViewInit 
   @Input()
   public sidebarRoutes: StacheNavLink[];
 
-  public isOpen: boolean = false;
+  public sidebarOpen: boolean = false;
 
   public sidebarLabel: string = 'Click to open sidebar';
 
@@ -35,38 +35,35 @@ export class StacheSidebarWrapperComponent implements  OnDestroy, AfterViewInit 
 
     this.mediaQuerySubscription = this.mediaQueryService
      .subscribe((args: SkyMediaBreakpoints) => {
-       this.isOpen = (args <= SkyMediaBreakpoints.sm);
+       this.sidebarOpen = (args <= SkyMediaBreakpoints.sm);
        this.toggleSidebar();
      });
   }
 
   public ngAfterViewInit(): void {
-    this.stacheContainers = this.windowRef.nativeWindow.document.querySelectorAll('.stache-container');
-    this.addClassToContainers();
+    this.addClassToBody();
   }
 
   public toggleSidebar(): void {
-    this.isOpen = !this.isOpen;
+    this.sidebarOpen = !this.sidebarOpen;
   }
 
   public ngOnDestroy(): void {
-    this.removeClassFromContainers();
+    this.removeClassFromBody();
     this.mediaQuerySubscription.unsubscribe();
   }
 
-  private addClassToContainers(): void {
-    if (this.stacheContainers && this.stacheContainers.length) {
-      Array.prototype.forEach.call(this.stacheContainers, (container: HTMLElement) => {
-        this.renderer.addClass(container, CONTAINER_SIDEBAR_CLASSNAME);
-      });
-    }
+  private addClassToBody(): void {
+    this.renderer.addClass(
+      this.windowRef.nativeWindow.document.body,
+      HAS_SIDEBAR_CLASS_NAME
+    );
   }
 
-  private removeClassFromContainers(): void {
-    if (this.stacheContainers && this.stacheContainers.length) {
-      Array.prototype.forEach.call(this.stacheContainers, (container: HTMLElement) => {
-        this.renderer.removeClass(container, CONTAINER_SIDEBAR_CLASSNAME);
-      });
-    }
+  private removeClassFromBody(): void {
+    this.renderer.removeClass(
+      this.windowRef.nativeWindow.document.body,
+      HAS_SIDEBAR_CLASS_NAME
+    );
   }
 }

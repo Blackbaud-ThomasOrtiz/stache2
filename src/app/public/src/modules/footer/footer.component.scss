@@ -3,6 +3,8 @@
 .stache-footer-wrapper {
   background-color: $stache-background-color-neutral-light;
   padding: $stache-padding $stache-container-mobile-padding;
+  position: relative;
+  z-index: $stache-footer-z-index;
 }
 
 .stache-footer-heading {
