@@ -140,6 +140,7 @@ describe('StacheWrapperComponent', () => {
   class MockWindowService {
     public nativeWindow = {
       document: {
+        body: document.createElement('div'),
         getElementById: jasmine.createSpy('getElementById').and.callFake(function(id: any) {
           if (id !== undefined) {
             return {

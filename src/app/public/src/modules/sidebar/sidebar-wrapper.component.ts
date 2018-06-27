@@ -23,8 +23,6 @@ export class StacheSidebarWrapperComponent implements  OnDestroy, AfterViewInit 
 
   public elementId = `stache-sidebar-content-panel-${(nextUniqueId++)}`;
 
-  private stacheContainers: HTMLElement[];
-
   private mediaQuerySubscription: Subscription;
 
   constructor(

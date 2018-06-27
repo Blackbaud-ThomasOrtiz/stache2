@@ -5,6 +5,11 @@
   padding: $stache-padding $stache-container-mobile-padding;
   position: relative;
   z-index: $stache-footer-z-index;
+
+  ::ng-deep
+  .stache-nav-anchor {
+      color: #007399;
+  }
 }
 
 .stache-footer-heading {
@@ -17,3 +22,5 @@
   color: $stache-text-color-deemphasized;
   font-size: 85%;
 }
+
+

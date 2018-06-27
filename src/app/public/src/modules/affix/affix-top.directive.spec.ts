@@ -12,10 +12,25 @@ import { StacheWindowRef, StacheOmnibarAdapterService, TestUtility } from '../sh
 describe('AffixTopTestDirective', () => {
   const className: string = StacheAffixTopDirective.AFFIX_CLASS_NAME;
   let testOmnibarHeight: number = 0;
-
+  let footerTop: number = 100;
+  let mockElement: any;
   class MockOmnibarService {
     public getHeight(): number {
       return testOmnibarHeight;
+    }
+  }
+
+  class MockWindowRef {
+    public nativeWindow = {
+      pageYOffset: pageYOffset,
+      innerHeight: innerHeight,
+      document: {
+        querySelector(selector: string) {
+          if (selector === '.stache-footer-wrapper') {
+            return mockElement;
+          }
+        }
+      }
     }
   }
 
@@ -122,6 +137,22 @@ describe('AffixTopTestDirective', () => {
       expect(element).not.toHaveCssClass(className);
     })
   );
+
+  it('should set the maxHeight of the element based on footer and page height', () => {
+    const element = directiveElements[1].nativeElement.children[0];
+    footerTop = 50;
+    mockElement = {
+      getBoundingClientRect() {
+        return{
+          top: footerTop
+        }
+      }
+    };
+
+    TestUtility.triggerDomEvent(windowRef, 'scroll');
+
+    expect(element.style.maxHeight).to.Equal(25);
+  })
 
   it('should not attempt to reset the element if it already has',
     fakeAsync(() => {
