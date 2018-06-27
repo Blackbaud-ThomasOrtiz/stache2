@@ -9,28 +9,12 @@ import { StacheCodeComponent } from '../code';
 
 import { StacheWindowRef, StacheOmnibarAdapterService, TestUtility } from '../shared';
 
-describe('AffixTopTestDirective', () => {
+fdescribe('AffixTopTestDirective', () => {
   const className: string = StacheAffixTopDirective.AFFIX_CLASS_NAME;
   let testOmnibarHeight: number = 0;
-  let footerTop: number = 100;
-  let mockElement: any;
   class MockOmnibarService {
     public getHeight(): number {
       return testOmnibarHeight;
-    }
-  }
-
-  class MockWindowRef {
-    public nativeWindow = {
-      pageYOffset: pageYOffset,
-      innerHeight: innerHeight,
-      document: {
-        querySelector(selector: string) {
-          if (selector === '.stache-footer-wrapper') {
-            return mockElement;
-          }
-        }
-      }
     }
   }
 
@@ -140,25 +124,26 @@ describe('AffixTopTestDirective', () => {
 
   it('should set the maxHeight of the element based on footer and page height', () => {
     const element = directiveElements[1].nativeElement.children[0];
-    footerTop = 50;
-    mockElement = {
+    const directiveInstance = directiveElements[0].injector.get(StacheAffixTopDirective);
+    directiveInstance.footerWrapper = {
+      offsetTop: 250,
       getBoundingClientRect() {
-        return{
-          top: footerTop
-        }
+        console.log('bounding');
+        return {
+          top: 250
+        };
       }
     };
 
     TestUtility.triggerDomEvent(windowRef, 'scroll');
-
-    expect(element.style.maxHeight).to.Equal(25);
-  })
+    expect(element.style.maxHeight).toEqual(50);
+  });
 
   it('should not attempt to reset the element if it already has',
     fakeAsync(() => {
       const element = directiveElements[0].nativeElement;
       element.style.marginTop = '500px';
-
+      windowRef.scrollTo(0, 0);
       fixture.detectChanges();
       tick();
 

@@ -109,6 +109,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
   }
 
   private  footerIsVisible(): boolean {
+    console.log('is Vis?', this.footerWrapper);
     if (this.footerWrapper) {
       return (this.footerWrapper.getBoundingClientRect().top <= (this.windowRef.nativeWindow.innerHeight));
     }
