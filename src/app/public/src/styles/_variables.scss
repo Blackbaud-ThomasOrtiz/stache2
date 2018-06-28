@@ -38,6 +38,8 @@ $stache-screen-xs-max: $stache-screen-sm-min - 1 !default;
 $stache-screen-sm-max: $stache-screen-md-min - 1 !default;
 $stache-screen-md-max: $stache-screen-lg-min - 1 !default;
 
+$stache-container-max-width: 1600px;
+
 $stache-omnibar-height: 50px !default;
 
 $stache-container-padding: 150px !default;

@@ -103,7 +103,6 @@ export class StacheAffixTopDirective implements AfterViewInit {
 
     if (this.footerIsVisible()) {
       maxHeight = `${this.getOffset(this.footerWrapper) - this.windowRef.nativeWindow.pageYOffset - this.omnibarHeight}px`;
-      console.log(maxHeight);
     }
 
     this.renderer.setStyle(this.element, 'height', `${maxHeight}`);

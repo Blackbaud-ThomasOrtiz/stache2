@@ -63,3 +63,9 @@
     margin-top: $stache-omnibar-height;
   }
 }
+
+::ng-deep
+.stache-max-width-container {
+  max-width: $stache-container-max-width;
+  margin: 0 auto;
+}

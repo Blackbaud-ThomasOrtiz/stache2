@@ -2,13 +2,16 @@
 
 .stache-footer-wrapper {
   background-color: $stache-background-color-neutral-light;
-  padding: $stache-padding $stache-container-mobile-padding;
   position: relative;
   z-index: $stache-footer-z-index;
 
   ::ng-deep
   .stache-nav-anchor {
       color: #007399;
+  }
+
+  .stache-footer-content {
+    padding: $stache-padding $stache-container-mobile-padding;
   }
 }
 
