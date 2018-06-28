@@ -15,10 +15,10 @@ export class StacheAffixTopDirective implements AfterViewInit {
   public static readonly AFFIX_CLASS_NAME: string = 'stache-affix-top';
   public isAffixed = false;
 
-  private footerWrapper: any;
+  private footerWrapper: HTMLElement;
   private omnibarHeight: number = 0;
   private offsetTop: number = 0;
-  private element: any;
+  private element: HTMLElement;
 
   constructor (
     private renderer: Renderer2,
