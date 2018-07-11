@@ -1,0 +1,15 @@
+<div
+  class="stache-table-of-contents-wrapper"
+  [attr.aria-label]="'stache_table_of_contents_label' | skyAppResources"
+  [ngClass]="{
+    'stache-table-of-contents-closed': !tocOpen,
+    'stache-table-of-contents-open': tocOpen  }"
+  >
+
+  <div
+    class="stache-table-of-contents-content"
+    [id]="elementId">
+    <stache-table-of-contents *ngIf="tocOpen" [routes]="tocRoutes">
+    </stache-table-of-contents>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+@import '../../styles/_variables';
+
+.stache-table-of-contents-wrapper {
+  background-color: white;
+  position: absolute !important;
+  z-index: $stache-sidebar-z-index;
+  right: 5px;
+  top: 0;
+  bottom: 0;
+
+  .stache-table-of-contents-content {
+    width: $stache-sidebar-column-width;
+    padding-top: $stache-padding-half;
+    padding-bottom: $stache-padding-plus-half;
+    padding-right: $stache-padding-half;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
+  &.stache-table-of-contents-closed {
+    border-left: none;
+    margin-right: -$stache-sidebar-column-width;
+  }
+
+  ::ng-deep
+  &.stache-affix-top {
+    position: fixed !important;
+    left: auto;
+  }
+}
