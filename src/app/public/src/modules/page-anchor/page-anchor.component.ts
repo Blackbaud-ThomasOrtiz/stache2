@@ -22,6 +22,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
   public fragment: string;
   public path: string[];
   public order: number;
+  public offsetTop: number;
 
   @Input()
   public anchorId?: string;
@@ -48,6 +49,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
   public ngAfterViewInit(): void {
     this.name = this.getName();
     this.fragment = this.getFragment();
+    this.offsetTop = this.getOffsetTop();
     this.getOrder();
     this.registerAnchor();
     this.cdRef.detectChanges();
@@ -64,6 +66,10 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
       .replace(/[^\w-]+/g, '');
   }
 
+  private getOffsetTop(): number {
+    return this.elementRef.nativeElement.getBoundingClientRect().top;
+  }
+
   private getOrder(): void {
     let anchors = this.windowRef.nativeWindow.document.querySelectorAll('stache-page-anchor div');
     for (let i = 0; i < anchors.length; i++) {
@@ -78,7 +84,8 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
       path: this.path,
       name: this.name,
       fragment: this.fragment,
-      order: this.order
+      order: this.order,
+      offsetTop: this.offsetTop
     } as StacheNavLink);
   }
 }

@@ -14,7 +14,7 @@
     line-height: $stache-line-height-base;
     border-left: 4px solid transparent;
 
-    &.active {
+    &.stache-table-of-contents-active {
       border-left-color: $stache-background-color-primary-dark;
     }
 
