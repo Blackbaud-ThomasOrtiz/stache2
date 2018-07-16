@@ -132,7 +132,8 @@ describe('StachePageAnchorComponent', () => {
       path: ['/'],
       name: 'Test Content',
       fragment: 'test-content',
-      order: 1
+      order: 1,
+      offsetTop: 0
     };
 
     component.ngOnInit();

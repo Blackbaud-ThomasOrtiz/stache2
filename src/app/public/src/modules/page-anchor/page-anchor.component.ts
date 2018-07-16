@@ -67,7 +67,7 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
   }
 
   private getOffsetTop(): number {
-    return this.elementRef.nativeElement.getBoundingClientRect().top;
+    return this.elementRef.nativeElement.offsetTop;
   }
 
   private getOrder(): void {

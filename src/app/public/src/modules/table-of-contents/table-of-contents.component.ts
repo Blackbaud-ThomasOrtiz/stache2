@@ -1,5 +1,4 @@
-import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, HostListener, HostBinding } from '@angular/core';
-
+import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { StacheNav, StacheNavLink } from '../nav';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { StacheWindowRef } from '../shared';
@@ -13,25 +12,19 @@ import { StacheWindowRef } from '../shared';
 export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit {
   @Input()
   public routes: StacheNavLink[] = [];
-  @HostBinding('class.active')
-  public active: boolean = false;
 
   private documentElement: any;
+  private documentBottom: number;
   private pageOffset: number;
-  private pageHeight: number;
-  private document: Document;
   private window: Window;
   private activeRoute: StacheNavLink;
-  private anchors: any;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private windowRef: StacheWindowRef
   ) {
     this.window = this.windowRef.nativeWindow;
-    this.document = this.window.document;
-    this.documentElement = document.documentElement;
-    this.pageHeight = this.documentElement.offsetHeight;
+    this.documentElement = this.window.document.documentElement;
   }
 
   public ngAfterViewInit() {
@@ -39,22 +32,33 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
     setTimeout(this.updateActiveRoute(), 0);
   }
 
-  @HostListener('window:scroll', ['$event'])
-  public onScroll(event: Event) {
+  @HostListener('window:scroll')
+  public onScroll() {
     this.trackPageOffset();
     this.updateActiveRoute();
     this.updateView();
   }
 
   private trackPageOffset() {
-    this.pageOffset = -this.documentElement.getBoundingClientRect().top; // represents bottom of page
-    console.log('offset', this.pageOffset);
+    // Represents top of page
+    // 300px buffer given to aid with click visualization
+    this.pageOffset = (this.window.pageYOffset - 300);
+
+    // Tracks page bottom so final route can be highlighted if associated anchor provides limited content
+    // (Logic based on Angular implementation)
+    this.documentBottom = Math.round(this.documentElement.getBoundingClientRect().bottom);
   }
 
   private updateActiveRoute() {
+    if (this.window.innerHeight === this.documentBottom) {
+      this.activeRoute = this.routes[this.routes.length - 1];
+      return;
+    }
+
     this.routes.map((route: StacheNavLink) => {
       console.log(route.offsetTop);
-      if ((route.offsetTop - 100) <= this.pageOffset) { // allows us to click to nav with updated highlight
+      console.log(this.pageOffset);
+      if (route.offsetTop <= this.pageOffset) {
         this.activeRoute = route;
       }
     });
