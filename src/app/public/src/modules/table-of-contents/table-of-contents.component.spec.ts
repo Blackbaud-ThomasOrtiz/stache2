@@ -6,7 +6,7 @@ import { StacheTableOfContentsComponent } from './table-of-contents.component';
 import { StacheWindowRef } from '../shared';
 import { StacheNavLink } from '../nav';
 
-fdescribe('StacheTableOfContentsComponent', () => {
+describe('StacheTableOfContentsComponent', () => {
   let component: StacheTableOfContentsComponent;
   let fixture: ComponentFixture<StacheTableOfContentsComponent>;
   let mockWindowService: any;
@@ -17,11 +17,18 @@ fdescribe('StacheTableOfContentsComponent', () => {
         documentElement: {
           getBoundingClientRect: () => {
             return { bottom: 100 };
+          },
+          querySelector: () => {
+            return this.testElement;
           }
         }
       },
       innerHeight: 100,
       pageYOffset: 400
+    };
+
+    public testElement = {
+      offsetTop: 100
     };
   }
 
@@ -66,13 +73,16 @@ fdescribe('StacheTableOfContentsComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  // it('should scroll', () => {
-  //   ;
-  //   component.onScroll();
-  //   expect(component['documentBottom']).toEqual(200);
-  //   expect(component['window'].innerHeight).toEqual(100);
-  //   expect(component['activeRoute']).toEqual(route);
-  // });
+  it('should scroll, route offset <= page offset', () => {
+    mockWindowService.nativeWindow.innerHeight = 400;
+    component.ngAfterViewInit();
+    component.onScroll();
+    expect(component['documentBottom']).toEqual(100);
+    expect(component['window'].innerHeight).toEqual(400);
+    expect(component['activeRoute']).toEqual(route);
+
+    mockWindowService.nativeWindow.innerHeight = 100;
+  });
 
   it('should scroll, multiple routes', () => {
     component.routes.push({

@@ -6,10 +6,12 @@ import {
   AfterViewInit,
   Input
 } from '@angular/core';
+import {
+  StacheWindowRef,
+  StacheRouteService
+} from '../shared';
 import { StacheNavLink } from '../nav';
-
 import { StachePageAnchorService } from './page-anchor.service';
-import { StacheWindowRef, StacheRouteService } from '../shared';
 
 @Component({
   selector: 'stache-page-anchor',
@@ -33,8 +35,8 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
     private windowRef: StacheWindowRef,
     private cdRef: ChangeDetectorRef,
     private anchorService: StachePageAnchorService) {
-      this.name = '';
-    }
+    this.name = '';
+  }
 
   public ngOnInit(): void {
     this.name = this.getName();
@@ -67,7 +69,13 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
   }
 
   private getOffsetTop(): number {
-    return this.elementRef.nativeElement.offsetTop;
+    // Tutorial Anchors have extra wrappers that change element location of applicable offsetTop
+    const tutorialAnchorOffsetElement =
+      this.findAncestor(this.elementRef.nativeElement, 'stache-tutorial-step');
+
+    return tutorialAnchorOffsetElement ?
+      tutorialAnchorOffsetElement.offsetTop :
+      this.elementRef.nativeElement.offsetTop;
   }
 
   private getOrder(): void {
@@ -87,5 +95,15 @@ export class StachePageAnchorComponent implements OnInit, StacheNavLink, AfterVi
       order: this.order,
       offsetTop: this.offsetTop
     } as StacheNavLink);
+  }
+
+  private findAncestor(element: HTMLElement, elClass: string): HTMLElement {
+    while (element) {
+      if (element.classList.contains(elClass)) {
+        return element;
+      }
+      element = element.parentElement;
+    }
+    return undefined;
   }
 }

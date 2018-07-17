@@ -146,4 +146,10 @@ describe('StachePageAnchorComponent', () => {
     fixture.detectChanges();
     expect(mockWindowService.testElement.scrollIntoView).toHaveBeenCalled();
   });
+
+  it('finds a tutorial anchor', () => {
+    fixture.debugElement.nativeElement.classList = ['stache-tutorial-step'];
+    component.ngAfterViewInit();
+    expect(component.offsetTop).not.toBe(undefined);
+  });
 });
