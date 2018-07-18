@@ -3,8 +3,7 @@
 .stache-table-of-contents-wrapper {
   background-color: white;
   position: absolute !important;
-  z-index: $stache-sidebar-z-index;
-  right: 5px;
+  right: 0;
   top: 0;
   bottom: 0;
 
@@ -25,6 +24,6 @@
   ::ng-deep
   &.stache-affix-top {
     position: fixed !important;
-    left: auto;
+    right: auto;
   }
 }

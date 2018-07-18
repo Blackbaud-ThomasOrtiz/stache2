@@ -172,6 +172,23 @@ describe('StacheWrapperComponent', () => {
             return [];
         })
       },
+      documentElement: {
+        querySelector: jasmine.createSpy('querySelector').and.callFake(function(selector: string) {
+          return {
+            textContent: mockTextContent,
+            classList: {
+              add(cssClass: string) { }
+            },
+            scrollIntoView() { },
+            offsetHeight: 50,
+            getBoundingClientRect() {
+              return {
+                top: 100
+              };
+            }
+          };
+        })
+      },
       setTimeout: jasmine.createSpy('setTimeout').and.callFake(function(callback: any) {
         return callback();
       }),

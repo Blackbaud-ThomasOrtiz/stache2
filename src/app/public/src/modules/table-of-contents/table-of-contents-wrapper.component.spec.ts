@@ -1,23 +1,14 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import {Pipe, PipeTransform} from '@angular/core';
-
+import { Pipe, PipeTransform } from '@angular/core';
 import { expect } from '@blackbaud/skyux-lib-testing';
-import { StacheNavComponent, StacheNavService, StacheNavLink } from '../nav';
-
+import { StacheNavComponent, StacheNavService } from '../nav';
 import { Subject } from 'rxjs';
-
-import {
-  StacheWindowRef,
-  StacheRouteMetadataService,
-  StacheRouteService,
-  StacheOmnibarAdapterService
-} from '../shared';
 import { StacheLinkModule } from '../link';
 import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
 import { SkyMediaQueryModule } from '@blackbaud/skyux/dist/core';
 import { StacheTableOfContentsWrapperComponent } from './table-of-contents-wrapper.component';
 import { StacheTableOfContentsComponent } from './table-of-contents.component';
+import { StacheWindowRef } from '../shared';
 
 @Pipe({
   name: 'skyAppResources'
@@ -45,36 +36,12 @@ class MockSkyAppResourcesService {
   }
 }
 
-fdescribe('StacheTableOfContentsWrapperComponent', () => {
-  const CONTAINER_TOC_CLASSNAME = 'stache-table-of-contents-enabled';
+describe('StacheTableOfContentsWrapperComponent', () => {
   let component: StacheTableOfContentsWrapperComponent;
   let fixture: ComponentFixture<StacheTableOfContentsWrapperComponent>;
   let mockElement: HTMLElement = document.createElement('div');
-  let mockRouteService: any;
-  let mockOmnibarService: any;
   let mockWindowRef: any;
   let mockSkyAppResourcesService: any;
-
-  let activeUrl: string = '/';
-  let windowWidth = 1000;
-  let omnibarHeight = 50;
-
-  const route: StacheNavLink = {
-    name: 'string',
-    path: '/test',
-    offsetTop: 100,
-    isActiveTocAnchor: false
-  };
-
-  class MockRouteService {
-    public getActiveUrl() {
-      return activeUrl;
-    }
-
-    public getActiveRoutes() {
-      return [route];
-    }
-  }
 
   class MockWindowService {
     public nativeWindow = {
@@ -83,13 +50,26 @@ fdescribe('StacheTableOfContentsWrapperComponent', () => {
           getBoundingClientRect: () => {
             return { bottom: 100 };
           },
-          querySelector: () => {
-            return this.testElement;
-          }
+          querySelector: jasmine.createSpy('querySelector').and.callFake(function(selector: string) {
+            return {
+              textContent: 'test',
+              classList: {
+                add(cssClass: string) { }
+              },
+              scrollIntoView() { },
+              offsetHeight: 50,
+              getBoundingClientRect() {
+                return {
+                  top: 100
+                };
+              }
+            };
+          })
         }
       },
       innerHeight: 100,
-      pageYOffset: 400
+      pageYOffset: 400,
+      body: mockElement
     };
 
     public testElement = {
@@ -99,15 +79,7 @@ fdescribe('StacheTableOfContentsWrapperComponent', () => {
     public onResize$ = new Subject();
   }
 
-  class MockOmnibarService {
-    public getHeight() {
-      return omnibarHeight;
-    }
-  }
-
   beforeEach(() => {
-    mockRouteService = new MockRouteService();
-    mockOmnibarService = new MockOmnibarService();
     mockWindowRef = new MockWindowService();
     mockSkyAppResourcesService = new MockSkyAppResourcesService();
 
@@ -119,26 +91,20 @@ fdescribe('StacheTableOfContentsWrapperComponent', () => {
         MockSkyAppResourcesPipe
       ],
       imports: [
-        RouterTestingModule,
         StacheLinkModule,
         SkyMediaQueryModule
       ],
       providers: [
         StacheNavService,
         { provide: SkyAppResourcesService, useValue: mockSkyAppResourcesService },
-        { provide: StacheWindowRef, useValue: mockWindowRef },
-        { provide: StacheOmnibarAdapterService, useValue: mockOmnibarService },
-        { provide: StacheRouteService, useValue: mockRouteService },
-        { provide: StacheRouteMetadataService, useValue: { routes: [] } }
+        { provide: StacheWindowRef, useValue: mockWindowRef }
       ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(StacheTableOfContentsWrapperComponent);
     fixture.detectChanges();
-    fixture.debugElement.nativeElement.classList = ['stache-tutorial-step'];
     component = fixture.componentInstance;
-    component.tocRoutes = mockRouteService.getActiveRoutes();
   });
 
   it('should render the component', () => {
@@ -165,18 +131,4 @@ fdescribe('StacheTableOfContentsWrapperComponent', () => {
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement).toBeAccessible();
   }));
-
-  it(`should add the class ${ CONTAINER_TOC_CLASSNAME } to the body if one exists`, () => {
-    component.ngAfterViewInit();
-    expect(mockElement.className).toContain(CONTAINER_TOC_CLASSNAME);
-    mockElement.remove();
-  });
-
-  it(`should remove the class ${ CONTAINER_TOC_CLASSNAME } from the body on destroy`, () => {
-    component.ngAfterViewInit();
-    expect(mockElement.className).toContain(CONTAINER_TOC_CLASSNAME);
-    component.ngOnDestroy();
-    expect(mockElement.className).not.toContain(CONTAINER_TOC_CLASSNAME);
-    mockElement.remove();
-  });
 });
