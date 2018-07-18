@@ -20,10 +20,4 @@
     border-left: none;
     margin-right: -$stache-sidebar-column-width;
   }
-
-  ::ng-deep
-  &.stache-affix-top {
-    position: fixed !important;
-    right: auto;
-  }
 }

@@ -4,6 +4,7 @@ import { StacheNavModule } from '../nav';
 import { StacheTableOfContentsComponent } from './table-of-contents.component';
 import { StacheTableOfContentsWrapperComponent } from './table-of-contents-wrapper.component';
 import { SkyAppRuntimeModule } from '@blackbaud/skyux-builder/runtime';
+import { StacheAffixModule } from '../affix';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { SkyAppRuntimeModule } from '@blackbaud/skyux-builder/runtime';
   imports: [
     CommonModule,
     StacheNavModule,
-    SkyAppRuntimeModule
+    SkyAppRuntimeModule,
+    StacheAffixModule
   ],
   exports: [
     StacheTableOfContentsWrapperComponent,
