@@ -64,7 +64,8 @@ export class StacheTableOfContentsComponent implements StacheNav, AfterViewInit 
   private updateActiveRoute() {
     // If scroll reaches the bottom of the page automatically assign last route as active route
     // See documentBottom comment, above
-    if (this.window.innerHeight === this.documentBottom) {
+    // 5px padding helps to catch bottom of page in all window sizes/scales
+    if ((this.window.innerHeight + 5) >= this.documentBottom) {
       this.activeRoute = this.routes[this.routes.length - 1];
       return;
     }

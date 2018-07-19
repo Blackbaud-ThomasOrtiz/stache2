@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, Renderer2 } from '@angular/core';
 import { expect } from '@blackbaud/skyux-lib-testing';
-import { StacheNavComponent, StacheNavService } from '../nav';
+import { StacheNavComponent, StacheNavService, StacheNavLink } from '../nav';
 import { Subject } from 'rxjs';
 import { StacheLinkModule } from '../link';
 import { SkyAppResourcesService } from '@blackbaud/skyux-builder/runtime/i18n';
@@ -39,13 +39,14 @@ class MockSkyAppResourcesService {
 describe('StacheTableOfContentsWrapperComponent', () => {
   let component: StacheTableOfContentsWrapperComponent;
   let fixture: ComponentFixture<StacheTableOfContentsWrapperComponent>;
-  let mockElement: HTMLElement = document.createElement('div');
+  let mockElement: Element = document.createElement('body');
   let mockWindowRef: any;
   let mockSkyAppResourcesService: any;
 
   class MockWindowService {
     public nativeWindow = {
       document: {
+        body: mockElement,
         documentElement: {
           getBoundingClientRect: () => {
             return { bottom: 100 };
@@ -68,8 +69,7 @@ describe('StacheTableOfContentsWrapperComponent', () => {
         }
       },
       innerHeight: 100,
-      pageYOffset: 400,
-      body: mockElement
+      pageYOffset: 400
     };
 
     public testElement = {
@@ -78,6 +78,13 @@ describe('StacheTableOfContentsWrapperComponent', () => {
 
     public onResize$ = new Subject();
   }
+
+  const route: StacheNavLink = {
+    name: 'string',
+    path: '/string',
+    offsetTop: 123,
+    isActiveTocAnchor: false
+  };
 
   beforeEach(() => {
     mockWindowRef = new MockWindowService();
@@ -105,6 +112,8 @@ describe('StacheTableOfContentsWrapperComponent', () => {
     fixture = TestBed.createComponent(StacheTableOfContentsWrapperComponent);
     fixture.detectChanges();
     component = fixture.componentInstance;
+    component.tocRoutes = [ route ];
+    component.ngAfterViewInit();
   });
 
   it('should render the component', () => {

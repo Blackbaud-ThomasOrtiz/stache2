@@ -1,4 +1,4 @@
-import { Component, Input, Renderer2, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, Input, Renderer2, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { SkyMediaQueryService, SkyMediaBreakpoints } from '@blackbaud/skyux/dist/core';
 import { StacheNavLink } from '../nav';
@@ -12,13 +12,11 @@ const HAS_TOC_CLASS_NAME = 'stache-table-of-contents-enabled';
   templateUrl: './table-of-contents-wrapper.component.html',
   styleUrls: ['./table-of-contents-wrapper.component.scss']
 })
-export class StacheTableOfContentsWrapperComponent implements AfterViewInit, OnDestroy {
+export class StacheTableOfContentsWrapperComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input()
   public tocRoutes: StacheNavLink[];
 
   public tocOpen: boolean = false;
-
-  public tocLabel: string = 'Click to open sidebar';
 
   public elementId = `stache-table-of-contents-content-panel-${(nextUniqueId++)}`;
 
@@ -28,12 +26,14 @@ export class StacheTableOfContentsWrapperComponent implements AfterViewInit, OnD
     private mediaQueryService: SkyMediaQueryService,
     private renderer: Renderer2,
     private windowRef: StacheWindowRef
-  ) {
+  ) {}
+
+  public ngOnInit(): void {
     this.mediaQuerySubscription = this.mediaQueryService
-      .subscribe((args: SkyMediaBreakpoints) => {
-        this.tocOpen = (args <= SkyMediaBreakpoints.md);
-        this.toggleToc();
-      });
+    .subscribe((args: SkyMediaBreakpoints) => {
+      this.tocOpen = (args <= SkyMediaBreakpoints.md);
+      this.toggleToc();
+    });
   }
 
   public ngAfterViewInit(): void {

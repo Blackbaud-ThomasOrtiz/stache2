@@ -87,6 +87,7 @@ export class StacheAffixTopDirective implements AfterViewInit {
       this.renderer.setStyle(this.element, 'position', 'fixed');
       this.renderer.setStyle(this.element, 'top', '0px');
       this.renderer.setStyle(this.element, 'width', 'inherit');
+      this.renderer.setStyle(this.element, 'overflow-y', 'auto');
       this.renderer.addClass(this.element, StacheAffixTopDirective.AFFIX_CLASS_NAME);
     }
   }
