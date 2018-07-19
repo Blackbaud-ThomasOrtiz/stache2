@@ -13,7 +13,10 @@
     padding-bottom: $stache-padding-plus-half;
     padding-right: $stache-padding-half;
     max-height: 100%;
-    overflow-y: auto;
+
+    .stache-affix-top {
+      overflow-y: scroll;
+    }
   }
 
   &.stache-table-of-contents-closed {

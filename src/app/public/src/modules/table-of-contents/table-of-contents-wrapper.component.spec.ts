@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Pipe, PipeTransform, Renderer2 } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { expect } from '@blackbaud/skyux-lib-testing';
 import { StacheNavComponent, StacheNavService, StacheNavLink } from '../nav';
 import { Subject } from 'rxjs';

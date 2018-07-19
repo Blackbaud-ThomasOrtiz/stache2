@@ -74,11 +74,9 @@ describe('StacheTableOfContentsComponent', () => {
   });
 
   it('should scroll, route offset <= page offset', () => {
-    mockWindowService.nativeWindow.innerHeight = 400;
+    mockWindowService.nativeWindow.innerHeight = undefined;
     component.ngAfterViewInit();
     component.onScroll();
-    expect(component['documentBottom']).toEqual(100);
-    expect(component['window'].innerHeight).toEqual(400);
     expect(component['activeRoute']).toEqual(route);
 
     mockWindowService.nativeWindow.innerHeight = 100;
