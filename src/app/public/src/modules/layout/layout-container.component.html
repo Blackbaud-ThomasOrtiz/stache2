@@ -1,4 +1,4 @@
-<stache-table-of-contents-wrapper [tocRoutes]="inPageRoutes">
+<stache-table-of-contents-wrapper *ngIf="showTableOfContents" [tocRoutes]="inPageRoutes">
 </stache-table-of-contents-wrapper>
 
 <stache-layout-blank identifier="container">

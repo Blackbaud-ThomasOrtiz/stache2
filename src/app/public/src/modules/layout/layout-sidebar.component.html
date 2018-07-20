@@ -1,7 +1,7 @@
 <stache-sidebar-wrapper stacheAffixTop [sidebarRoutes]="sidebarRoutes">
 </stache-sidebar-wrapper>
 
-<stache-table-of-contents-wrapper [tocRoutes]="inPageRoutes">
+<stache-table-of-contents-wrapper *ngIf="showTableOfContents" [tocRoutes]="inPageRoutes">
 </stache-table-of-contents-wrapper>
 
 <stache-layout-blank identifier="sidebar">
