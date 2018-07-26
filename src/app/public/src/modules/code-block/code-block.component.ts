@@ -52,6 +52,7 @@ export class StacheCodeBlockComponent implements AfterViewInit {
   public codeTemplateRef: any;
 
   public output: SafeHtml;
+  public displayName: string;
   private readonly defaultLanguage: string = 'markup';
   private validLanguages: string[];
   private _languageType: string = this.defaultLanguage;
@@ -74,6 +75,10 @@ export class StacheCodeBlockComponent implements AfterViewInit {
     code = this.formatCode(code);
     code = this.highlightCode(code);
     this.output = this.sanitizer.bypassSecurityTrustHtml(code);
+    this.displayName = this._languageType
+      .replace('sharp', '#')
+      .replace('net', '.net')
+      .replace(/\bjs\b/, 'javascript');
     this.cdRef.detectChanges();
   }
 
