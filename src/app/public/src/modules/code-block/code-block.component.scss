@@ -20,17 +20,18 @@
   justify-content: space-between;
 
   .code-block-language-label {
+    font-weight: 300;
+    font-size: 19px;
     color: $sky-text-color-deemphasized;
     display: flex;
     align-items: center;
-    padding: 0 $stache-padding * 2;
+    padding: 0 $stache-padding * 2 2px;
   }
 
   ::ng-deep
-  .stache-clipboard-btn {
-    border: none;
-    border-left: 1px solid $stache-border-color-neutral-medium;
-    border-radius: 0%;
-    outline: none;
+  .stache-copy-to-clipboard {
+    display: flex;
+    align-items: center;
+    padding: $stache-padding;
   }
 }
