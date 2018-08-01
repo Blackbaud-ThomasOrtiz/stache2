@@ -9,7 +9,7 @@
   border-top: none;
   margin-top: 0;
   background-color: $stache-background-color-selected;
-  padding: $stache-padding * 2;
+  padding: $stache-padding-double;
   overflow-x: auto;
   margin-bottom: $stache-margin * 2;
 }
@@ -20,8 +20,5 @@
   justify-content: space-between;
   align-items: center;
   padding: $stache-padding;
-
-  .code-block-language-label {
-    padding-left: $stache-padding;
-  }
+  padding-left: $stache-padding-double;
 }
