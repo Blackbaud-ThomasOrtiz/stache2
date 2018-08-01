@@ -18,17 +18,10 @@
   border: 1px solid $stache-border-color-neutral-medium;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: $stache-padding;
 
   .code-block-language-label {
-    display: flex;
-    align-items: center;
-    padding: 0 $stache-padding * 2;
-  }
-
-  ::ng-deep
-  .stache-copy-to-clipboard {
-    display: flex;
-    align-items: center;
-    padding: $stache-padding;
+    padding-left: $stache-padding;
   }
 }

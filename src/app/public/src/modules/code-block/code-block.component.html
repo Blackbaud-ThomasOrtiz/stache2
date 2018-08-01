@@ -3,13 +3,11 @@
       <div class="code-block-language-label sky-subsection-heading">
         {{displayName}}
       </div>
-      <div class="stache-copy-to-clipboard">
-        <stache-copy-to-clipboard
-          [copyTarget]="stacheCodeOutput"
-          buttonText="{{ 'stache_copy_to_clipboard_button' | skyAppResources }}"
-          buttonClickedText="{{ 'stache_copy_to_clipboard_button_success' | skyAppResources }}">
-        </stache-copy-to-clipboard>
-      </div>
+      <stache-copy-to-clipboard
+        [copyTarget]="stacheCodeOutput"
+        buttonText="{{ 'stache_copy_to_clipboard_button' | skyAppResources }}"
+        buttonClickedText="{{ 'stache_copy_to_clipboard_button_success' | skyAppResources }}">
+      </stache-copy-to-clipboard>
     </div>
     <div #codeFromContent class="stache-code-input">
       <ng-content></ng-content>
