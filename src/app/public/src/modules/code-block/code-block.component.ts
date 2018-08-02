@@ -39,6 +39,10 @@ export class StacheCodeBlockComponent implements AfterViewInit {
   public set languageType(value: string) {
     if (this.validLanguages.indexOf(value) > -1) {
       this._languageType = value;
+      this.displayName = this._languageType
+        .replace('sharp', '#')
+        .replace('net', '.net')
+        .replace(/\bjs\b/, 'javascript');
     } else {
       this._languageType = this.defaultLanguage;
     }
@@ -75,10 +79,6 @@ export class StacheCodeBlockComponent implements AfterViewInit {
     code = this.formatCode(code);
     code = this.highlightCode(code);
     this.output = this.sanitizer.bypassSecurityTrustHtml(code);
-    this.displayName = this._languageType
-      .replace('sharp', '#')
-      .replace('net', '.net')
-      .replace(/\bjs\b/, 'javascript');
     this.cdRef.detectChanges();
   }
 
