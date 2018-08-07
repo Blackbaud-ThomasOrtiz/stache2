@@ -1,5 +1,5 @@
 
-# 2.11.1 (2018-08-07)
+# 2.11.2 (2018-08-07)
 - Addressed a Windows compatibility issue with `skyux-builder-plugin-stache` version `1.5.0`, updated to version `1.5.1`.
 
 # 2.11.1 (2018-08-03)
