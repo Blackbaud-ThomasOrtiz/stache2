@@ -1,6 +1,6 @@
 
 # 2.11.2 (2018-08-07)
-- Addressed a Windows compatibility issue with `skyux-builder-plugin-stache` version `1.5.0`, updated to version `1.5.1`.
+- Updated the [skyux-builder-plugin-stache](https://github.com/blackbaud/skyux-builder-plugin-stache/blob/master/CHANGELOG.md#151-2018-08-02) to `1.5.1`.
 
 # 2.11.1 (2018-08-03)
 - Updated version number for `skyux-builder-plugin-stache` to `1.5.0`, allowing users to have nested directories in the global Stache application data.
