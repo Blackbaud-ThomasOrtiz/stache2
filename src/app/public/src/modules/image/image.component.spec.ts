@@ -34,4 +34,10 @@ describe('StacheImageComponent', () => {
     expect(component.imageSource).toBe(imageSource);
   });
 
+  it('should have a description input', () => {
+    component.description = this.description;
+    fixture.detectChanges();
+    expect(component.description).toBe(this.description);
+  });
+
 });

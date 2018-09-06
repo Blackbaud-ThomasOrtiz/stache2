@@ -1,3 +1,7 @@
-<div class="stache-image">
+<div class="stache-image"><div class="stache-image"></div>
   <img class="stache-image-object" [src]="imageSource" [alt]="imageAlt" />
+
+  <div *ngIf="description" class="stache-image-description">
+    <span><i>{{ description }}</i><span>
+  </div>
 </div>
