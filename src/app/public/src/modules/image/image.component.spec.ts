@@ -10,6 +10,7 @@ describe('StacheImageComponent', () => {
   let fixture: ComponentFixture<StacheImageComponent>;
   let debugElement: DebugElement;
   let imageSource = 'https://this.is.fake.com/image.png';
+  let caption = 'This is a caption';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,10 +35,15 @@ describe('StacheImageComponent', () => {
     expect(component.imageSource).toBe(imageSource);
   });
 
-  it('should have a description input', () => {
-    component.description = this.description;
+  it('should have a caption input', () => {
+    component.caption = caption;
     fixture.detectChanges();
-    expect(component.description).toBe(this.description);
+    expect(component.caption).toBe(caption);
+  });
+
+  it('should should leave caption as undefined if its not passed in by the user', () => {
+    fixture.detectChanges();
+    expect(component.caption).toBe(undefined);
   });
 
 });
