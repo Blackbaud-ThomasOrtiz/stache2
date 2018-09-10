@@ -41,7 +41,7 @@ describe('StacheImageComponent', () => {
     expect(component.caption).toBe(caption);
   });
 
-  it('should should leave caption as undefined if its not passed in by the user', () => {
+  it('should leave caption as undefined if it is not passed in by the user', () => {
     fixture.detectChanges();
     expect(component.caption).toBe(undefined);
   });
